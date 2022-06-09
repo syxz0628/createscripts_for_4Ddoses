@@ -12,7 +12,7 @@ class class_reg_4DCT():
             FDctdir='/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + str(self.patinfo.patientID[patientNo]) + '/' + \
                         str(self.patinfo.ctName[patientNo]) + '/' + 'ctx/'
             refCTname = FDctdir + str(self.patinfo.patientName[patientNo]) + '_00.nrrd'
-            outputname='/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + str(self.patinfo.patientID[patientNo]) + '/' + \
+            outputname='./' + str(self.patinfo.patientID[patientNo]) + '/' + \
                         str(self.patinfo.ctName[patientNo]) + '/' + 'Reg/'
             execommand = 'python /u/motion/Software/RegistrationScript/createPlastimatchScript.py F ' + refCTname + ' -D ' + FDctdir + ' -O ' + outputname + ' -n ' + \
                          str(self.patinfo.patientName[patientNo]) + ' -t bspline -S -p 32'
