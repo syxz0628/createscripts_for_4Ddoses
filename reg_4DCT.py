@@ -1,6 +1,4 @@
-import math
-import time
-import numpy as np
+import os
 
 class class_reg_4DCT():
     def __init__(self,patinfo):
@@ -17,4 +15,4 @@ class class_reg_4DCT():
                         self.patinfo.ctName[patientNo] + '/' + 'Reg/'
             execommand = 'python /u/motion/Software/RegistrationScript/createPlastimatchScript.py F ' + refCTname + ' -D ' + FDctdir + ' -O ' + outputname + ' -n ' + \
                          self.patinfo.patientName[patientNo] + ' -t bspline -S -p 32'
-            print(execommand)
+            tmp = os.popen(execommand).readlines()
