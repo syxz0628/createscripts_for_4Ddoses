@@ -8,7 +8,7 @@ class class_reg_4DCT():
         print("start registrate 4D CTs for all patients listed in patinfo.txt")
         print(self.patinfo.patientName)
         for patientNo in range(0,len(self.patinfo.patientName)):
-            print("trying plastimatch in: ",self.patinfo.patientName[patientNo])
+            print("#trying plastimatch in: ",self.patinfo.patientName[patientNo])
             FDctdir='/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + str(self.patinfo.patientID[patientNo]) + '/' + \
                         str(self.patinfo.ctName[patientNo]) + '/' + 'ctx/'
             refCTname = FDctdir + str(self.patinfo.patientName[patientNo]) + '_00.nrrd'
@@ -18,4 +18,4 @@ class class_reg_4DCT():
                          str(self.patinfo.patientName[patientNo]) + ' -t bspline -S -p 32'
             print(execommand)
             #tmp = os.popen(execommand).readlines()
-            print("finished plastimatch in: ",self.patinfo.patientName[patientNo])
+            print("#finished plastimatch in: ",self.patinfo.patientName[patientNo])
