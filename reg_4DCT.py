@@ -16,6 +16,8 @@ class class_reg_4DCT():
                         str(self.patinfo.ctName[patientNo]) + '/' + 'Reg/'
             execommand = 'python /u/motion/Software/RegistrationScript/createPlastimatchScript.py F ' + refCTname + ' -D ' + FDctdir + ' -O ' + outputname + ' -n ' + \
                          str(self.patinfo.patientName[patientNo]) + ' -t bspline -S -p 32'
+            rmcommand='rm -rf'+outputname+'*'
+            print(rmcommand)
             print(execommand)
             #tmp = os.popen(execommand).readlines()
             print("#finished plastimatch in: ",self.patinfo.patientName[patientNo])
