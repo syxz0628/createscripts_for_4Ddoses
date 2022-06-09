@@ -29,4 +29,4 @@ if __name__ == '__main__':
     patinfo.fun_readpat_info()
     if args.reg:
         reg_cts=reg_4DCT.class_reg_4DCT(patinfo)
-        reg_cts.fun_auto_reg_4DCT
+        reg_cts.fun_auto_reg_4DCT()

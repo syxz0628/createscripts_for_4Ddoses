@@ -15,4 +15,4 @@ class class_reg_4DCT():
                         self.patinfo.ctName[patientNo] + '/' + 'Reg/'
             execommand = 'python /u/motion/Software/RegistrationScript/createPlastimatchScript.py F ' + refCTname + ' -D ' + FDctdir + ' -O ' + outputname + ' -n ' + \
                          self.patinfo.patientName[patientNo] + ' -t bspline -S -p 32'
-            tmp = os.popen(execommand).readlines
+            tmp = os.popen(execommand).readlines()
