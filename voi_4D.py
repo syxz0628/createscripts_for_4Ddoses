@@ -24,12 +24,15 @@ class class_gen_4D_vois():
         with open(runexec, 'w+') as writesh:
             for patientNo in range(0,len(self.patinfo.patientName)):
                 print("#trying 4D voi in: ",self.patinfo.patientName[patientNo])
+
                 data_path = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + str(
                     self.patinfo.patientID[patientNo]) + '/' + str(self.patinfo.ctName[patientNo]) + '/'
+                shell_del = 'shell rm '+data_path+'vois/4D/*'
                 read_trafo= 'trafo \''+data_path+'Reg/'+str(self.patinfo.patientName[patientNo])+'\' / r select(bw)'
                 read_3Dvoi= 'voi \''+data_path+'vois/3D/Average/'+str(self.patinfo.patientName[patientNo])+'\' / r'
                 voisine2='voi * / create4D voistate(0) maxthreads(16)'
                 write_4Dvoi='voi / write bin prefix(\''+data_path+'vois/4D/\')'
+                print(shell_del)
                 print(read_trafo)
                 print(read_3Dvoi)
                 print(voisine2)
@@ -39,7 +42,7 @@ class class_gen_4D_vois():
                 print("#finished 4D voi: ",self.patinfo.patientName[patientNo],self.patinfo.ctName[patientNo])
                 print()
                 writesh.writelines(
-                    read_trafo + os.linesep + read_3Dvoi + os.linesep + voisine2 + os.linesep + write_4Dvoi + os.linesep + 'quit' + os.linesep + os.linesep)
+                    shell_del + read_trafo + os.linesep + read_3Dvoi + os.linesep + voisine2 + os.linesep + write_4Dvoi + os.linesep + 'quit' + os.linesep + os.linesep)
                 # createfilepath=data_path + 'vois/create4Dvois.exec'
                 # with open(createfilepath,'w+') as writeexec:
                 #     writeexec.writelines(
