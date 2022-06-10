@@ -41,7 +41,7 @@ class class_gen_4D_vois():
                 print("#finished 4D voi: ",self.patinfo.patientName[patientNo],self.patinfo.ctName[patientNo])
                 print()
                 writesh.writelines(
-                    shell_del + read_trafo + os.linesep + read_3Dvoi + os.linesep + voisine2 + os.linesep + write_4Dvoi + os.linesep + 'quit' + os.linesep + os.linesep)
+                    shell_del + read_trafo + os.linesep + read_3Dvoi + os.linesep + voisine2 + os.linesep + write_4Dvoi + os.linesep + os.linesep)
                 # createfilepath=data_path + 'vois/create4Dvois.exec'
                 # with open(createfilepath,'w+') as writeexec:
                 #     writeexec.writelines(
