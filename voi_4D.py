@@ -45,7 +45,8 @@ class class_gen_4D_vois():
                         read_trafo + os.linesep + read_3Dvoi + os.linesep + voisine2 + os.linesep + write_4Dvoi + os.linesep + 'quit')
                 cdtofolder= 'cd ./'+str(self.patinfo.ctName[patientNo])+'/vois/'+os.linesep
                 runtrip='runtrip.sh create4Dvois.exec'+os.linesep
-                printinfo='finished '+self.patinfo.patientName[patientNo]+os.linesep+os.linesep
-                writesh.writelines(cdtofolder+runtrip+printinfo)
+                cdoutfolder='cd ../../../'+os.linesep
+                printinfo='#finished '+self.patinfo.patientName[patientNo]+os.linesep+os.linesep
+                writesh.writelines(cdtofolder+runtrip+printinfo+cdoutfolder)
 
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
