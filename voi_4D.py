@@ -21,18 +21,31 @@ class class_gen_4D_vois():
         print("start generate 4D vois command that could be run in TRiP")
         print(self.patinfo.patientName)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        for patientNo in range(0,len(self.patinfo.patientName)):
-            print("#trying 4D voi in: ",self.patinfo.patientName[patientNo])
-            data_path = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + str(
-                self.patinfo.patientID[patientNo]) + '/' + str(self.patinfo.ctName[patientNo]) + '/'
-            read_trafo= 'trafo \''+data_path+'Reg/'+str(self.patinfo.patientName[patientNo])+'\' / r select(bw)'
-            read_3Dvoi= 'voi \''+data_path+'vois/3D/Average/'+str(self.patinfo.patientName[patientNo])+'\' / r'
-            voisine2='voi * / create4D voistate(0) maxthreads(16)'
-            write_4Dvoi='voi / write bin prefix(\''+data_path+'vois/4D/'
-            print(read_trafo)
-            print(read_3Dvoi)
-            print(voisine2)
-            print(write_4Dvoi)
-            #tmp = os.popen(execommand).readlines()
-            print("#finished 4D voi: ",self.patinfo.patientName[patientNo],self.patinfo.ctName[patientNo])
+        runsh='/u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/03-4Dvois_motion.sh'
+        with open(runsh, 'w+') as writesh:
+            for patientNo in range(0,len(self.patinfo.patientName)):
+                print("#trying 4D voi in: ",self.patinfo.patientName[patientNo])
+                data_path = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + str(
+                    self.patinfo.patientID[patientNo]) + '/' + str(self.patinfo.ctName[patientNo]) + '/'
+                read_trafo= 'trafo \''+data_path+'Reg/'+str(self.patinfo.patientName[patientNo])+'\' / r select(bw)'
+                read_3Dvoi= 'voi \''+data_path+'vois/3D/Average/'+str(self.patinfo.patientName[patientNo])+'\' / r'
+                voisine2='voi * / create4D voistate(0) maxthreads(16)'
+                write_4Dvoi='voi / write bin prefix(\''+data_path+'vois/4D/'
+                print(read_trafo)
+                print(read_3Dvoi)
+                print(voisine2)
+                print(write_4Dvoi)
+                #tmp = os.popen(execommand).readlines()
+                print("quit")
+                print("#finished 4D voi: ",self.patinfo.patientName[patientNo],self.patinfo.ctName[patientNo])
+                print()
+                createfilepath=data_path + 'vois/create4Dvois.exec'
+                with open(createfilepath,'w+') as writeexec:
+                    writeexec.writelines(
+                        read_trafo + os.linesep + read_3Dvoi + os.linesep + voisine2 + os.linesep + write_4Dvoi + os.linesep + 'quit')
+                cdtofolder= 'cd ./'+str(self.patinfo.ctName[patientNo])+'/vois/'+os.linesep
+                runtrip='runtrip.sh create4Dvois.exec'+os.linesep
+                printinfo='finished '+self.patinfo.patientName[patientNo]+os.linesep+os.linesep
+                writesh.writelines(cdtofolder+runtrip+printinfo)
+
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
