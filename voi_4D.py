@@ -16,12 +16,12 @@ class class_gen_4D_vois():
             print(generate4D)
             print(mvcommand)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    def fun_gen_4D_vois(self):
+    def fun_gen_4D_vois(self,createvoiexec):
         print("start generate 4D vois command that could be run in TRiP")
         print(self.patinfo.patientName)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        runsh='/u/ysheng/MyAIXd/project/patients//03-4Dvois_motion.exec'
-        with open(runsh, 'w+') as writesh:
+        runexec=createvoiexec+'03-4Dvois_motion.exec'
+        with open(runexec, 'w+') as writesh:
             for patientNo in range(0,len(self.patinfo.patientName)):
                 print("#trying 4D voi in: ",self.patinfo.patientName[patientNo])
                 data_path = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + str(

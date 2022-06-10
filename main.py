@@ -11,8 +11,8 @@ if __name__ == '__main__':
                         help="patient info file folder,check /u/ysheng/MyAIXd/projects/patient/commands/01-prepare4Ddata/patient_info.txt for format.")
     parser.add_argument("-r", "--reg", required=False, action='store_true',
                         help="Generate/Print Regstration commandlines based on 4D cts, necessary info in patient: id, name, ct folder. makesure 00 is the reference image")
-    parser.add_argument("-v", "--voi", required=False, action='store_true',
-                        help="Generate/Print exec for generate 4D vois from trafo and 3D vois. Necessary info in patient: id, name, ct folder. makesure 00 is the reference image")
+    parser.add_argument("-v", "--voi", required=False, nargs='?',
+                        help="Generate/Print exec for generate 4D vois from trafo and 3D vois. Necessary info in patient: id, name, ct folder and write to exec file path. makesure 00 is the reference image")
     # parser.add_argument("-s","--showfigs", required=False,  action='store_true', help="show daf and related figures", default="False")
     # parser.add_argument("-m","--mbr", nargs='?',required=False, help="machine beam record .xml file path")
     # parser.add_argument("-t", "--timeoffset", required=False, type=int, nargs='+',
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     if args.reg:
         reg_cts=reg_4DCT.class_reg_4DCT(patinfo)
         reg_cts.fun_auto_reg_4DCT()
-    if args.voi:
+    if args.voi!=None:
         voi_4D=voi_4D.class_gen_4D_vois(patinfo)
         voi_4D.fun_preparefolder()
-        voi_4D.fun_gen_4D_vois()
+        voi_4D.fun_gen_4D_vois(args.voi)
