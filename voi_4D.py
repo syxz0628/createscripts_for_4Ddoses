@@ -38,7 +38,6 @@ class class_gen_4D_vois():
                 print(voisine2)
                 print(write_4Dvoi)
                 #tmp = os.popen(execommand).readlines()
-                print("quit")
                 print("#finished 4D voi: ",self.patinfo.patientName[patientNo],self.patinfo.ctName[patientNo])
                 print()
                 writesh.writelines(
@@ -52,4 +51,6 @@ class class_gen_4D_vois():
                 # cdoutfolder='cd ../../../'+os.linesep
                 # printinfo='#finished '+self.patinfo.patientName[patientNo]+os.linesep+os.linesep
                 # writesh.writelines(cdtofolder+runtrip+cdoutfolder+printinfo)
+            writesh.write('quit')
+        print("quit")
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
