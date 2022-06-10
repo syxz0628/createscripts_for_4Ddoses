@@ -20,7 +20,7 @@ class class_gen_4D_vois():
         print("start generate 4D vois command that could be run in TRiP")
         print(self.patinfo.patientName)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        runsh='/d/bio/medphys/PatienData/SPHIC_motion_mitigate/03-4Dvois_motion.sh'
+        runsh='/u/ysheng/MyAIXd/project/patients//03-4Dvois_motion.exec'
         with open(runsh, 'w+') as writesh:
             for patientNo in range(0,len(self.patinfo.patientName)):
                 print("#trying 4D voi in: ",self.patinfo.patientName[patientNo])
@@ -38,13 +38,15 @@ class class_gen_4D_vois():
                 print("quit")
                 print("#finished 4D voi: ",self.patinfo.patientName[patientNo],self.patinfo.ctName[patientNo])
                 print()
-                createfilepath=data_path + 'vois/create4Dvois.exec'
-                with open(createfilepath,'w+') as writeexec:
-                    writeexec.writelines(
-                        read_trafo + os.linesep + read_3Dvoi + os.linesep + voisine2 + os.linesep + write_4Dvoi + os.linesep + 'quit')
-                cdtofolder= 'cd '+data_path+'vois/'+os.linesep
-                runtrip='runtrip.sh create4Dvois.exec'+os.linesep
-                cdoutfolder='cd ../../../'+os.linesep
-                printinfo='#finished '+self.patinfo.patientName[patientNo]+os.linesep+os.linesep
-                writesh.writelines(cdtofolder+runtrip+cdoutfolder+printinfo)
+                writesh.writelines(
+                    read_trafo + os.linesep + read_3Dvoi + os.linesep + voisine2 + os.linesep + write_4Dvoi + os.linesep + 'quit' + os.linesep + os.linesep)
+                # createfilepath=data_path + 'vois/create4Dvois.exec'
+                # with open(createfilepath,'w+') as writeexec:
+                #     writeexec.writelines(
+                #         read_trafo + os.linesep + read_3Dvoi + os.linesep + voisine2 + os.linesep + write_4Dvoi + os.linesep + 'quit')
+                # cdtofolder= 'cd '+data_path+'vois/'+os.linesep
+                # runtrip='runtrip.sh create4Dvois.exec -l'+os.linesep
+                # cdoutfolder='cd ../../../'+os.linesep
+                # printinfo='#finished '+self.patinfo.patientName[patientNo]+os.linesep+os.linesep
+                # writesh.writelines(cdtofolder+runtrip+cdoutfolder+printinfo)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
