@@ -33,7 +33,7 @@ class class_gen_ave_00_vois():
                     self.patinfo.patientName[patientNo]) + '_00.nrrd'
                 ln00ctx = 'ln -s ' + data_path + 'ctx/Average/' + str(
                     self.patinfo.patientName[patientNo]) + '.ctx ' + data_path + 'vois/ave2p00/' + str(
-                    self.patinfo.patientName[patientNo]) + '_00.ctx'
+                    self.patinfo.patientName[patientNo]) + '.ctx'
                 outputname='../' + str(self.patinfo.patientID[patientNo]) + '/' + \
                             str(self.patinfo.ctName[patientNo]) + '/vois/3D/p00/'
                 regcommand = 'python /u/motion/Software/RegistrationScript/createPlastimatchScript.py F ' + data_path + 'vois/ave2p00/' + str(
