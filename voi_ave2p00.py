@@ -10,6 +10,7 @@ class class_gen_ave_00_vois():
         print(cd2folder)
         shfilepath='/u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/031_3Dvois_ave_phase00.sh'
         with open (shfilepath,'w+') as shfilew:
+            shfilew.writelines(cd2folder + os.linesep)
             for patientNo in range(0, len(self.patinfo.patientName)):
                 data_path = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + str(
                     self.patinfo.patientID[patientNo]) + '/' + str(self.patinfo.ctName[patientNo]) + '/'
@@ -39,6 +40,8 @@ class class_gen_ave_00_vois():
                     self.patinfo.patientName[patientNo]) + '_00.nrrd' + ' -M ' + data_path + 'vois/ave2p00/' + str(
                     self.patinfo.patientName[patientNo]) + '_01.nrrd' + ' -O ' + outputname + ' -n ' + \
                              str(self.patinfo.patientName[patientNo]) + ' -t bspline -S -p 32'
+                shfilew.writelines("#start g reg for ave and phase00 for: " + self.patinfo.patientName[patientNo] +
+                                     self.patinfo.ctName[patientNo] + os.linesep)
                 shfilew.writelines(generate_folder1+os.linesep)
                 shfilew.writelines(generate_folder2+os.linesep)
                 shfilew.writelines(hed2nrrd_fun+os.linesep)
@@ -46,8 +49,8 @@ class class_gen_ave_00_vois():
                 shfilew.writelines(ln00ctx+os.linesep)
                 shfilew.writelines(ln01nrrd+os.linesep)
                 shfilew.writelines(ln01ctx+os.linesep)
-                shfilew.writelines(regcommand+os.linesep)
-            shfilew.writelines(cd2folder+os.linesep)
+                shfilew.writelines(regcommand+os.linesep+os.linesep)
+            shfilew.write('#start runging the voi generate exec file using TRiP')
             shfilew.write('runtrip.sh 032_ave2ph00.exec')
 
     def fun_gen_ph00_vois_exec(self): # generate file under: /u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/032_ave2ph00.exec
@@ -73,6 +76,6 @@ class class_gen_ave_00_vois():
                 execfilew.writelines(write_4Dvoi+os.linesep)
                 # tmp = os.popen(execommand).readlines()
                 execfilew.writelines("#finished 4D voi: "+ self.patinfo.patientName[patientNo]+
-                                     self.patinfo.ctName[patientNo]+os.linesep)
+                                     self.patinfo.ctName[patientNo]+os.linesep+os.linesep)
 
             execfilew.writelines('quit')
