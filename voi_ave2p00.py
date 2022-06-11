@@ -39,7 +39,7 @@ class class_gen_ave_00_vois():
                     self.patinfo.patientName[patientNo]) + '_00.nrrd' + ' -M ' + data_path + 'vois/ave2p00/' + str(
                     self.patinfo.patientName[patientNo]) + '_01.nrrd' + ' -O ' + outputname + ' -n ' + \
                              str(self.patinfo.patientName[patientNo]) + ' -t bspline -S -p 32'
-                shfilew.writelines(generate_folder1+os.linesep)
+                shfilew.writelines(generate_folder1+os.linesep+generate_folder2+os.linesep)
                 shfilew.writelines(generate_folder2+os.linesep)
                 shfilew.writelines(hed2nrrd_fun+os.linesep)
                 shfilew.writelines(ln00nrrd+os.linesep)

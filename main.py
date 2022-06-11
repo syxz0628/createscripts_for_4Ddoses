@@ -36,7 +36,7 @@ if __name__ == '__main__':
     if args.reg:
         reg_cts=reg_4DCT.class_reg_4DCT(patinfo)
         reg_cts.fun_auto_reg_4DCT()
-    if args.voi!=None:
+    if args.voi:
         voi_4D=voi_4D.class_gen_4D_vois(patinfo)
         voi_4D.fun_preparefolder()
         voi_4D.fun_gen_4D_vois()
