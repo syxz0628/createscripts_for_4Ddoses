@@ -3,6 +3,7 @@ import argparse
 # Press the green button in the gutter to run the script.
 import reg_4DCT
 import voi_4D
+import voi_ave2p00
 
 if __name__ == '__main__':
 
@@ -13,6 +14,9 @@ if __name__ == '__main__':
                         help="Generate/Print Regstration commandlines based on 4D cts, necessary info in patient: id, name, ct folder. makesure 00 is the reference image")
     parser.add_argument("-v", "--voi", required=False, nargs='?',
                         help="Generate/Print exec for generate 4D vois from trafo and 3D vois. Necessary info in patient: id, name, ct folder and write to exec file path. makesure 00 is the reference image")
+    parser.add_argument("-a", "--a20", required=False, action='store_true',
+                        help="Generate/Print exec for reg and generate vois for phase 00 from average 3D vois. Necessary info in patient: id, name, ct folder. sh file written in /patient/commands/01-prepare4Ddata/03_3Dvois_ave_phase00.sh")
+
     # parser.add_argument("-s","--showfigs", required=False,  action='store_true', help="show daf and related figures", default="False")
     # parser.add_argument("-m","--mbr", nargs='?',required=False, help="machine beam record .xml file path")
     # parser.add_argument("-t", "--timeoffset", required=False, type=int, nargs='+',
@@ -36,3 +40,7 @@ if __name__ == '__main__':
         voi_4D=voi_4D.class_gen_4D_vois(patinfo)
         voi_4D.fun_preparefolder()
         voi_4D.fun_gen_4D_vois(args.voi)
+    if args.a20:
+        voi_3D=voi_ave2p00.class_gen_ave_00_vois(patinfo)
+        voi_3D.fun_preparefile()
+        voi_3D.fun_gen_ph00_vois_exec()
