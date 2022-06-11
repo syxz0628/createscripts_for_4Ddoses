@@ -39,7 +39,7 @@ class class_gen_ave_00_vois():
                     self.patinfo.patientName[patientNo]) + '_00.nrrd' + ' -M ' + data_path + 'vois/ave2p00/' + str(
                     self.patinfo.patientName[patientNo]) + '_01.nrrd' + ' -O ' + outputname + ' -n ' + \
                              str(self.patinfo.patientName[patientNo]) + ' -t bspline -S -p 32'
-                shfilew.writelines(generate_folder1+os.linesep)
+                shfilew.writelines(generate_folder1+os.linesep+generate_folder2+os.linesep)
                 shfilew.writelines(generate_folder2+os.linesep)
                 shfilew.writelines(hed2nrrd_fun+os.linesep)
                 shfilew.writelines(ln00nrrd+os.linesep)
@@ -48,7 +48,7 @@ class class_gen_ave_00_vois():
                 shfilew.writelines(ln01ctx+os.linesep)
                 shfilew.writelines(regcommand+os.linesep)
             shfilew.writelines(cd2folder+os.linesep)
-            shfilew.writelines('runtrip.sh 032_ave2ph00.exec')
+            shfilew.write('runtrip.sh 032_ave2ph00.exec')
 
     def fun_gen_ph00_vois_exec(self): # generate file under: /u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/032_ave2ph00.exec
         print("start generate ave to phase00 vois command that could be run in TRiP")
