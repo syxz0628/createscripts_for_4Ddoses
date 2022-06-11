@@ -12,7 +12,7 @@ if __name__ == '__main__':
                         help="patient info file folder,check /u/ysheng/MyAIXd/projects/patient/commands/01-prepare4Ddata/patient_info.txt for format.")
     parser.add_argument("-r", "--reg", required=False, action='store_true',
                         help="Generate/Print Regstration commandlines based on 4D cts, necessary info in patient: id, name, ct folder. makesure 00 is the reference image")
-    parser.add_argument("-v", "--voi", required=False, nargs='?',
+    parser.add_argument("-v", "--voi", required=False, action='store_true',
                         help="Generate/Print exec for generate 4D vois from trafo and 3D vois. Necessary info in patient: id, name, ct folder and write to exec file path. makesure 00 is the reference image")
     parser.add_argument("-a", "--a20", required=False, action='store_true',
                         help="Generate/Print exec for reg and generate vois for phase 00 from average 3D vois. Necessary info in patient: id, name, ct folder. sh file written in /patient/commands/01-prepare4Ddata/03_3Dvois_ave_phase00.sh")
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     if args.voi!=None:
         voi_4D=voi_4D.class_gen_4D_vois(patinfo)
         voi_4D.fun_preparefolder()
-        voi_4D.fun_gen_4D_vois(args.voi)
+        voi_4D.fun_gen_4D_vois()
     if args.a20:
         voi_3D=voi_ave2p00.class_gen_ave_00_vois(patinfo)
         voi_3D.fun_preparefile()
