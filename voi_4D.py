@@ -16,7 +16,7 @@ class class_gen_4D_vois():
             print(generate4D)
             print(mvcommand)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    def fun_gen_4D_vois(self,createvoiexec):
+    def fun_gen_4D_vois(self):
         print("start generate 4D vois command that could be run in TRiP")
         print(self.patinfo.patientName)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
