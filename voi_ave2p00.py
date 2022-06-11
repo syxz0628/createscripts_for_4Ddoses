@@ -39,7 +39,7 @@ class class_gen_ave_00_vois():
                     self.patinfo.patientName[patientNo]) + '_00.nrrd' + ' -M ' + data_path + 'vois/ave2p00/' + str(
                     self.patinfo.patientName[patientNo]) + '_01.nrrd' + ' -O ' + outputname + ' -n ' + \
                              str(self.patinfo.patientName[patientNo]) + ' -t bspline -S -p 32'
-                shfilew.writelines(generate_folder1+os.linesep+generate_folder2+os.linesep)
+                shfilew.writelines(generate_folder1+os.linesep)
                 shfilew.writelines(generate_folder2+os.linesep)
                 shfilew.writelines(hed2nrrd_fun+os.linesep)
                 shfilew.writelines(ln00nrrd+os.linesep)
@@ -64,15 +64,15 @@ class class_gen_ave_00_vois():
                 read_3Dvoi = 'voi \'' + data_path + 'vois/3D/Average/' + str(self.patinfo.patientName[patientNo]) + '\' / r'
                 voisine2 = 'voi * / create4D voistate(0) maxthreads(16)'
                 write_4Dvoi = 'voi / write bin prefix(\'' + data_path + 'vois/3D/p00/\')'
-                execfilew.writelines("#start g 3D voi phase00 for: ", self.patinfo.patientName[patientNo],
-                                     self.patinfo.ctName[patientNo])
+                execfilew.writelines("#start g 3D voi phase00 for: "+self.patinfo.patientName[patientNo]+
+                                     self.patinfo.ctName[patientNo]+os.linesep)
                 execfilew.writelines(shell_del+os.linesep)
                 execfilew.writelines(read_trafo+os.linesep)
                 execfilew.writelines(read_3Dvoi+os.linesep)
                 execfilew.writelines(voisine2+os.linesep)
                 execfilew.writelines(write_4Dvoi+os.linesep)
                 # tmp = os.popen(execommand).readlines()
-                execfilew.writelines("#finished 4D voi: ", self.patinfo.patientName[patientNo],
+                execfilew.writelines("#finished 4D voi: "+ self.patinfo.patientName[patientNo]+
                                      self.patinfo.ctName[patientNo]+os.linesep)
 
             execfilew.writelines('quit')
