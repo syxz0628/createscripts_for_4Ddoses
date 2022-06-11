@@ -10,7 +10,6 @@ class class_gen_ave_00_vois():
         print(cd2folder)
         shfilepath='/u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/031_3Dvois_ave_phase00.sh'
         with open (shfilepath,'w+') as shfilew:
-            shfilew.writelines(cd2folder + os.linesep)
             for patientNo in range(0, len(self.patinfo.patientName)):
                 data_path = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + str(
                     self.patinfo.patientID[patientNo]) + '/' + str(self.patinfo.ctName[patientNo]) + '/'
@@ -35,11 +34,12 @@ class class_gen_ave_00_vois():
                     self.patinfo.patientName[patientNo]) + '.ctx ' + data_path + 'vois/ave2p00/' + str(
                     self.patinfo.patientName[patientNo]) + '.ctx'
                 outputname='../' + str(self.patinfo.patientID[patientNo]) + '/' + \
-                            str(self.patinfo.ctName[patientNo]) + '/vois/3D/p00/'
+                            str(self.patinfo.ctName[patientNo]) + '/vois/ave2p00/'
                 regcommand = 'python /u/motion/Software/RegistrationScript/createPlastimatchScript.py F ' + data_path + 'vois/ave2p00/' + str(
                     self.patinfo.patientName[patientNo]) + '_00.nrrd' + ' -M ' + data_path + 'vois/ave2p00/' + str(
                     self.patinfo.patientName[patientNo]) + '_01.nrrd' + ' -O ' + outputname + ' -n ' + \
                              str(self.patinfo.patientName[patientNo]) + ' -t bspline -S -p 32'
+                shfilew.writelines(cd2folder + os.linesep)
                 shfilew.writelines("#start g reg for ave and phase00 for: " + self.patinfo.patientName[patientNo] +
                                      self.patinfo.ctName[patientNo] + os.linesep)
                 shfilew.writelines(generate_folder1+os.linesep)
