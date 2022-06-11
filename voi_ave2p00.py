@@ -16,6 +16,7 @@ class class_gen_ave_00_vois():
 
                 generate_folder1='mkdir '+data_path+'vois/3D/p00'
                 generate_folder2 = 'mkdir ' + data_path + 'vois/ave2p00'
+                clean_folder2 = 'rm -rf ' + data_path + 'vois/ave2p00/*'
 
                 hed2nrrd_fun = 'hed2nrrd.sh ' + data_path + 'ctx/Average/' + str(
                     self.patinfo.patientName[patientNo]) + '.hed'
@@ -44,6 +45,7 @@ class class_gen_ave_00_vois():
                                      self.patinfo.ctName[patientNo] + os.linesep)
                 shfilew.writelines(generate_folder1+os.linesep)
                 shfilew.writelines(generate_folder2+os.linesep)
+                shfilew.writelines(clean_folder2 + os.linesep)
                 shfilew.writelines(hed2nrrd_fun+os.linesep)
                 shfilew.writelines(ln00nrrd+os.linesep)
                 shfilew.writelines(ln00ctx+os.linesep)
