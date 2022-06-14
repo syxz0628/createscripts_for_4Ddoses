@@ -1,3 +1,4 @@
+import dafmbr_lmdout
 import read_CT_info
 import read_motion_info
 import argparse
@@ -5,7 +6,7 @@ import argparse
 import reg_4DCT
 import voi_4D
 import voi_ave2p00
-import dafmbr
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
@@ -17,7 +18,7 @@ if __name__ == '__main__':
                         help="Generate/Print exec for generate 4D vois from trafo and 3D vois. Necessary info in patient: id, name, ct folder and write to exec file path. makesure 00 is the reference image")
     parser.add_argument("-a", "--a20", required=False, action='store_true',
                         help="Generate/Print exec for reg and generate vois for phase 00 from average 3D vois. Necessary info in patient: id, name, ct folder. sh file written in /patient/commands/01-prepare4Ddata/03_3Dvois_ave_phase00.sh")
-    parser.add_argument("-d", "--dafmbr", required=False, nargs='?',
+    parser.add_argument("-m", "--motionpath", required=False, nargs='?',
                         help="write script to generate the lmdout info for each plans.")
 
     # parser.add_argument("-s","--showfigs", required=False,  action='store_true', help="show daf and related figures", default="False")
@@ -47,7 +48,7 @@ if __name__ == '__main__':
         voi_3D=voi_ave2p00.class_gen_ave_00_vois(CTinfo)
         voi_3D.fun_preparefile()
         voi_3D.fun_gen_ph00_vois_exec()
-    if args.dafmbr!=None:
-        dafmbrdata=voi_ave2p00.class_gen_ave_00_vois(args.dafmbr)
-        dafmbrdata.fun_preparefile()
-        dafmbrdata.fun_gen_ph00_vois_exec()
+    if args.motioninfo!=None:
+        dafmbrdata=read_motion_info.class_readmotion_info(args.motionpath)
+        dafmbrdata.fun_readpat_motion_info()
+        creatlmdoutsh=dafmbr_lmdout.class_dafmbr_lmdout_script(CTinfo,dafmbrdata)
