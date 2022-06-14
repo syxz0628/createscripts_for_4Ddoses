@@ -52,3 +52,4 @@ if __name__ == '__main__':
         dafmbrdata=read_motion_info.class_readmotion_info(args.motionpath)
         dafmbrdata.fun_readpat_motion_info()
         creatlmdoutsh=dafmbr_lmdout.class_dafmbr_lmdout_script(CTinfo,dafmbrdata)
+        creatlmdoutsh.fun_create_lmdout_exec()
