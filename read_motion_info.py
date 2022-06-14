@@ -14,7 +14,7 @@ class class_readmotion_info:
         with open(self.motion_info_path) as planmotionfile:
             for lineinfo in planmotionfile.readlines():
                 countlines+=1
-                if lineinfo[0]=='#':
+                if lineinfo[0]=='#' or lineinfo[0]=='N':
                     continue
                 basicinfo=lineinfo.split()
                 self.planNumber.append(basicinfo[0])
