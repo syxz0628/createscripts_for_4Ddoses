@@ -8,7 +8,7 @@ class class_dafmbr_lmdout_script():
         self.motioninfo=motioninfo
         self.fileversion = 1.0
     def fun_create_lmdout_exec(self):
-        print("start create sh for all plans listed in motion.txt")
+        print("start create sh for all plans listed in patient_motioninfo.txt")
         print(self.motioninfo.patientName)
         path2script='python3 /u/ysheng/MyAIXd/projects/Daf_mbr2mpos_lmdout/main.y -d '
         createsh='/u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/06_makemposlmdout_local.sh'
@@ -40,9 +40,11 @@ class class_dafmbr_lmdout_script():
                                 break
                             NoofMBRinplan+=1
                             lmdoutfilename = daffolder+'/lmdout/MBR_E'+str(firstEnergy)+'_0'+str(NoofMBRinplan)+checkMBRdate[:14]+'.lmdout'
-                            writesh.writelines('#'+MBRNo)
-                            writesh.writelines(path2script + path2daf+' -m '+path2MBR+' -l '+lmdoutfilename+' -o '+mposfilename+os.linesep)
+                            writesh.writelines('#'+MBRNo+os.linesep)
+                            writesh.writelines(
+                                path2script + path2daf + ' -m ' + path2MBR + ' -l ' + lmdoutfilename + ' -o ' + mposfilename + os.linesep + os.linesep)
                     NoofMBRinplan=0
+                    print('patient'+self.motioninfo.dafinfo[patientNo]+'finished')
 
 
 
