@@ -40,7 +40,7 @@ class class_dafmbr_lmdout_script():
                                 firstEnergy = elem.get('energy')
                                 break
                             NoofMBRinplan+=1
-                            lmdoutfilename = daffolder+'/lmdout/MBR_E'+str(firstEnergy)+'_0'+str(NoofMBRinplan)+checkMBRdate[:14]+'.lmdout'
+                            lmdoutfilename = daffolder+'/lmdout/MBR_E'+str(firstEnergy)+'_0'+str(NoofMBRinplan)+'_'+checkMBRdate[:14]+'.lmdout'
                             writesh.writelines('#'+MBRNo+os.linesep)
                             writesh.writelines(
                                 path2script + path2daf + ' -m ' + path2MBR + ' -l ' + lmdoutfilename + ' -o ' + mposfilename + os.linesep)
