@@ -15,7 +15,7 @@ class class_readpat_info:
         with open(self.pat_info_path) as patfile:
             for lineinfo in patfile.readlines():
                 countlines+=1
-                if lineinfo[0]=='#':
+                if lineinfo[0]=='#' or lineinfo[0]=='N':
                     continue
                 basicinfo=lineinfo.split()
                 self.patientID.append(basicinfo[1])
