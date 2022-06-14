@@ -14,7 +14,7 @@ class class_dafmbr_lmdout_script():
         createsh='/u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/06_makemposlmdout_local.sh'
         with open(createsh, 'w+') as writesh:
             for patientNo in range(0, len(self.motioninfo.planNumber)):
-                patientIDstringMotion='/d/bio/medphys/SPHIC_motion_mitigate/' + self.motioninfo.patientID[patientNo]
+                patientIDstringMotion='/d/bio/medphys/PatientData/SPHIC_motion_mitigate/' + self.motioninfo.patientID[patientNo]
                 patientIDstringLocal='/u/ysheng/MyAIXd/projects/patients/' + self.motioninfo.patientID[patientNo]
 
                 for dafNo in self.motioninfo.dafinfo[patientNo]:
