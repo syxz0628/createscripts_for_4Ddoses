@@ -39,7 +39,7 @@ if __name__ == '__main__':
     CTinfo.fun_readpat_info()
     if args.reg:
         reg_cts=reg_4DCT.class_reg_4DCT(CTinfo)
-        reg_cts.fun_auto_reg_4DCT()
+        reg_cts.fun_auto_reg_4DCT(args.pat)
     if args.voi:
         voi_4D=voi_4D.class_gen_4D_vois(CTinfo)
         voi_4D.fun_preparefolder()

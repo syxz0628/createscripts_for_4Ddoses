@@ -4,11 +4,11 @@ class class_reg_4DCT():
     def __init__(self,patinfo):
         self.patinfo=patinfo
         self.fileversion = 1.0
-    def fun_auto_reg_4DCT(self):
+    def fun_auto_reg_4DCT(self,path2patinfo):
         print("start registrate 4D CTs for all patients listed in patinfo.txt")
         print(self.patinfo.patientName)
-        if self.patinfo.rfind('/')!=-1:
-            regshfile=self.patinfo[:self.patinfo.rfind('/')]+'01_CreatePlastimatch4D.sh'
+        if path2patinfo.rfind('/')!=-1:
+            regshfile=path2patinfo[:path2patinfo.rfind('/')]+'01_CreatePlastimatch4D.sh'
         else:
             regshfile = './01_CreatePlastimatch4D.sh'
         with open(regshfile) as createplastimath:
