@@ -22,7 +22,7 @@ class class_dafmbr_lmdout_script():
                                  self.motioninfo.planName[patientNo] + ' daf:' + dafNo
                     daffolder=patientIDstringLocal+ '/4DdoseRecon/motion/'+self.motioninfo.planName[patientNo]+'_'+dafNo[:-4]
                     generateDAFFolder = 'mkdir '+daffolder
-                    cleanDAFFolder = 'rm * -rf ' + daffolder
+                    cleanDAFFolder = 'rm -rf ' + daffolder+'/*'
                     generatelmdoutFolder='mkdir '+daffolder+'/lmdout'
                     generateMposFolder='mkdir '+daffolder+'/mpos'
                     # write prepareing folder info. 1. generate planname+daf, 2. generate lmdout and mpos
