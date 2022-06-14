@@ -13,7 +13,7 @@ class class_dafmbr_lmdout_script():
         path2script='python3 /u/ysheng/MyAIXd/projects/Daf_mbr2mpos_lmdout/main.y -d '
         createsh='/u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/06_makemposlmdout_local.sh'
         with open(createsh, 'w+') as writesh:
-            for patientNo in range(0, len(self.motioninfo.planNumber())):
+            for patientNo in range(0, len(self.motioninfo.planNumber)):
                 patientIDstringMotion='/d/bio/medphys/SPHIC_motion_mitigate/' + self.motioninfo.patientID[patientNo]
                 patientIDstringLocal='/u/ysheng/MyAIXd/projects/patients/' + self.motioninfo.patientID[patientNo]
 
