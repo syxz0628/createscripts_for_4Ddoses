@@ -12,12 +12,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--pat", required=True,
                         help="patient info file folder,check /u/ysheng/MyAIXd/projects/patient/commands/01-prepare4Ddata/patient_info.txt for format.")
+    parser.add_argument("-a", "--a20", required=False, action='store_true',
+                        help="Generate/Print exec for reg and generate vois for phase 00 from average 3D vois. Necessary info in patient: id, name, ct folder. sh file written in /patient/commands/01-prepare4Ddata/03_3Dvois_ave_phase00.sh")
     parser.add_argument("-r", "--reg", required=False, action='store_true',
                         help="Generate/Print Regstration commandlines based on 4D cts, necessary info in patient: id, name, ct folder. makesure 00 is the reference image")
     parser.add_argument("-v", "--voi", required=False, action='store_true',
                         help="Generate/Print exec for generate 4D vois from trafo and 3D vois. Necessary info in patient: id, name, ct folder and write to exec file path. makesure 00 is the reference image")
-    parser.add_argument("-a", "--a20", required=False, action='store_true',
-                        help="Generate/Print exec for reg and generate vois for phase 00 from average 3D vois. Necessary info in patient: id, name, ct folder. sh file written in /patient/commands/01-prepare4Ddata/03_3Dvois_ave_phase00.sh")
     parser.add_argument("-m", "--motionpath", required=False, nargs='?',
                         help="write script to generate the lmdout info for each plans.")
 
