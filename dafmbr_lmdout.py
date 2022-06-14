@@ -43,7 +43,7 @@ class class_dafmbr_lmdout_script():
                             lmdoutfilename = daffolder+'/lmdout/MBR_E'+str(firstEnergy)+'_0'+str(NoofMBRinplan)+'_'+checkMBRdate[:14]+'.lmdout'
                             writesh.writelines('#'+MBRNo+os.linesep)
                             writesh.writelines(
-                                path2script + path2daf + ' -m ' + path2MBR + ' -l ' + lmdoutfilename + ' -o ' + mposfilename +' -g /u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/'+ os.linesep)
+                                path2script + path2daf + ' -m ' + path2MBR + ' -l ' + lmdoutfilename + ' -o ' + mposfilename +' -g /u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/lmdout_logfile.log'+ os.linesep)
                     NoofMBRinplan=0
                     writesh.write(os.linesep)
                     print('file \''+dafNo+'\' finished')
