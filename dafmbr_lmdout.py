@@ -44,7 +44,7 @@ class class_dafmbr_lmdout_script():
                             writesh.writelines(
                                 path2script + path2daf + ' -m ' + path2MBR + ' -l ' + lmdoutfilename + ' -o ' + mposfilename + os.linesep + os.linesep)
                     NoofMBRinplan=0
-                    print('patient'+self.motioninfo.dafinfo[patientNo]+'finished')
+                    print('patient'+dafNo+'finished')
 
 
 
