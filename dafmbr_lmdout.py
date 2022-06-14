@@ -18,7 +18,8 @@ class class_dafmbr_lmdout_script():
                 patientIDstringLocal='/u/ysheng/MyAIXd/projects/patients/' + self.motioninfo.patientID[patientNo]
 
                 for dafNo in self.motioninfo.dafinfo[patientNo]:
-                    printinfo1='#For: '+self.motioninfo.patientName[patientNo]+' '+self.motioninfo.planName[patientNo]
+                    printinfo1 = '#For patient:' + self.motioninfo.patientName[patientNo] + ' plan:' + \
+                                 self.motioninfo.planName[patientNo] + ' daf:' + dafNo
                     daffolder=patientIDstringLocal+ '/4DdoseRecon/motion/'+self.motioninfo.planName[patientNo]+'_'+dafNo[:-4]
                     generateDAFFolder = 'mkdir '+daffolder
                     cleanDAFFolder = 'rm * -rf ' + daffolder
@@ -42,9 +43,10 @@ class class_dafmbr_lmdout_script():
                             lmdoutfilename = daffolder+'/lmdout/MBR_E'+str(firstEnergy)+'_0'+str(NoofMBRinplan)+checkMBRdate[:14]+'.lmdout'
                             writesh.writelines('#'+MBRNo+os.linesep)
                             writesh.writelines(
-                                path2script + path2daf + ' -m ' + path2MBR + ' -l ' + lmdoutfilename + ' -o ' + mposfilename + os.linesep + os.linesep)
+                                path2script + path2daf + ' -m ' + path2MBR + ' -l ' + lmdoutfilename + ' -o ' + mposfilename + os.linesep)
                     NoofMBRinplan=0
-                    print('patient'+dafNo+'finished')
+                    writesh.write(os.linesep)
+                    print('file \''+dafNo+'\' finished')
 
 
 
