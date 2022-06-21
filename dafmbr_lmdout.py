@@ -37,11 +37,16 @@ class class_dafmbr_lmdout_script():
                         if dafNo[:9] in checkMBRdate:
                             path2MBR=patientIDstringMotion+'/Motion/MBR/'+MBRNo
                             ETtree = xml.etree.ElementTree.ElementTree(file=path2MBR)
+                            countenrgy=0
                             for elem in ETtree.iter(tag='IES'):
-                                firstEnergy = elem.get('energy')
-                                break
+                                if countenrgy!=0:
+                                    endEnergy = elem.get('energy')
+                                else:
+                                    firstEnergy=elem.get('energy')
+                                    countenrgy = 1
+
                             NoofMBRinplan+=1
-                            lmdoutfilename = daffolder+'/lmdout/MBR_E'+str(firstEnergy)+'_0'+str(NoofMBRinplan)+'_'+checkMBRdate[:14]+'.lmdout'
+                            lmdoutfilename = daffolder+'/lmdout/MBR_E'+str(firstEnergy)+'_E'+str(endEnergy)+'_0'+str(NoofMBRinplan)+'_'+checkMBRdate[:14]+'.lmdout'
                             writesh.writelines('#'+MBRNo+os.linesep)
                             writesh.writelines(
                                 path2script + path2daf + ' -m ' + path2MBR + ' -l ' + lmdoutfilename + ' -o ' + mposfilename +' -g /u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/lmdout_logfile.log'+ os.linesep)
