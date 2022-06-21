@@ -6,6 +6,8 @@ import argparse
 import reg_4DCT
 import voi_4D
 import voi_ave2p00
+import create_3Dplan
+import temp_write_planinfo
 
 if __name__ == '__main__':
 
@@ -20,7 +22,12 @@ if __name__ == '__main__':
                         help="Generate/Print exec for generate 4D vois from trafo and 3D vois. Necessary info in patient: id, name, ct folder and write to exec file path. makesure 00 is the reference image")
     parser.add_argument("-m", "--motionpath", required=False, nargs='?',
                         help="write script to generate the lmdout info for each plans.")
-
+    parser.add_argument("-T", "--ThreeDplan", required=False, action='store_true',
+                        help="Generate 3D plans exec files.")
+    parser.add_argument("-F", "--FourDplan", required=False, action='store_true',
+                        help="Generate 4D plans exec files.")
+    parser.add_argument("-t", "--temp", required=False, action='store_true',
+                        help="Write some tempinfo.")
     # parser.add_argument("-s","--showfigs", required=False,  action='store_true', help="show daf and related figures", default="False")
     # parser.add_argument("-m","--mbr", nargs='?',required=False, help="machine beam record .xml file path")
     # parser.add_argument("-t", "--timeoffset", required=False, type=int, nargs='+',
@@ -53,3 +60,8 @@ if __name__ == '__main__':
         dafmbrdata.fun_readpat_motion_info()
         creatlmdoutsh=dafmbr_lmdout.class_dafmbr_lmdout_script(CTinfo,dafmbrdata)
         creatlmdoutsh.fun_create_lmdout_exec()
+    if args.ThreeDplan:
+        create_3Dplan_sh=create_3Dplan.class_create3Dplan()
+        create_3Dplan_sh.fun_create_3Dplan_exec()
+    if args.temp:
+        tempinfo=temp_write_planinfo.class_temp()

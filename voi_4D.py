@@ -20,7 +20,7 @@ class class_gen_4D_vois():
         print("start generate 4D vois command that could be run in TRiP")
         print(self.patinfo.patientName)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        runexec='/u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/03-4Dvois_motion.exec'
+        runexec='/u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/03_4Dvois_motion.exec'
         with open(runexec, 'w+') as writesh:
             for patientNo in range(0,len(self.patinfo.patientName)):
                 print("#trying 4D voi in: ",self.patinfo.patientName[patientNo])
