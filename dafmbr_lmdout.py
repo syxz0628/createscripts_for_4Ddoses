@@ -33,9 +33,6 @@ class class_dafmbr_lmdout_script():
                     NoofMBRinplan=0
                     for MBRNo in self.motioninfo.mbrinfo[patientNo]:
                         checkMBRdate = re.sub(r'_', '',MBRNo ) #check MBR belongs to the daf
-                        print(patientNo)
-                        print(dafNo[:8])
-                        print(checkMBRdate)
                         if dafNo[:8] in checkMBRdate:
                             path2MBR=patientIDstringMotion+'/Motion/MBR/'+MBRNo
                             ETtree = xml.etree.ElementTree.ElementTree(file=path2MBR)
