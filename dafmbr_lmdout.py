@@ -21,20 +21,19 @@ class class_dafmbr_lmdout_script():
                     printinfo1 = '#For patient:' + self.motioninfo.patientName[patientNo] + ' plan:' + \
                                  self.motioninfo.planName[patientNo] + ' daf:' + dafNo
                     daffolder=patientIDstringLocal+ '/4DdoseRecon/motion/'+self.motioninfo.planName[patientNo]+'_'+dafNo[:-4]
-                    removefolder='rm -rf '+patientIDstringLocal+ '/4DdoseRecon/motion/2021*'
                     generateDAFFolder = 'mkdir '+daffolder
                     cleanDAFFolder = 'rm -rf ' + daffolder+'/*'
                     generatelmdoutFolder='mkdir '+daffolder+'/lmdout'
                     generateMposFolder='mkdir '+daffolder+'/mpos'
                     # write prepareing folder info. 1. generate planname+daf, 2. generate lmdout and mpos
                     writesh.writelines(
-                        printinfo1 + os.linesep + removefolder + os.linesep + generateDAFFolder + os.linesep + cleanDAFFolder + os.linesep + generatelmdoutFolder + os.linesep + generateMposFolder + os.linesep)
+                        printinfo1  + os.linesep + generateDAFFolder + os.linesep + cleanDAFFolder + os.linesep + generatelmdoutFolder + os.linesep + generateMposFolder + os.linesep)
                     path2daf = patientIDstringMotion + '/Motion/daf/' + dafNo
                     mposfilename = daffolder + '/mpos/' + dafNo[:-4] + '.mpos'
                     NoofMBRinplan=0
                     for MBRNo in self.motioninfo.mbrinfo[patientNo]:
                         checkMBRdate = re.sub(r'_', '',MBRNo ) #check MBR belongs to the daf
-                        if dafNo[:9] in checkMBRdate:
+                        if dafNo[:8] in checkMBRdate:
                             path2MBR=patientIDstringMotion+'/Motion/MBR/'+MBRNo
                             ETtree = xml.etree.ElementTree.ElementTree(file=path2MBR)
                             countenrgy=0
@@ -44,7 +43,6 @@ class class_dafmbr_lmdout_script():
                                 else:
                                     firstEnergy=elem.get('energy')
                                     countenrgy = 1
-
                             NoofMBRinplan+=1
                             lmdoutfilename = daffolder+'/lmdout/MBR_E'+str(firstEnergy)+'_E'+str(endEnergy)+'_0'+str(NoofMBRinplan)+'_'+checkMBRdate[:14]+'.lmdout'
                             writesh.writelines('#'+MBRNo+os.linesep)
