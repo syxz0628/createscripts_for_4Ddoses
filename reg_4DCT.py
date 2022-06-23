@@ -10,7 +10,7 @@ class class_reg_4DCT():
         if path2patinfo.rfind('/')!=-1:
             regshfile=path2patinfo[:path2patinfo.rfind('/')]+'02_CreatePlastimatch4D_motion.sh'
         else:
-            regshfile = './01_CreatePlastimatch4D.sh'
+            regshfile = '/u/ysheng/MyAIXd/projects/patient/commands/01-prepare4Ddata//02_CreatePlastimatch4D.sh'
         with open(regshfile,'w+') as createplastimath:
             for patientNo in range(0,len(self.patinfo.patientName)):
                 createplastimath.writelines("#trying plastimatch in: "+self.patinfo.patientName[patientNo]+os.linesep)
