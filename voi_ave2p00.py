@@ -8,7 +8,7 @@ class class_gen_ave_00_vois():
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
         cd2folder = 'cd /d/bio/medphys/PatienData/SPHIC_motion_mitigate/cmd/'
         print(cd2folder)
-        shfilepath='/u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/011_3Dvois_ave_phase00_motion.sh'
+        shfilepath='/u/ysheng/MyAIXd/projects/patients/commands/011_3Dvois_ave_phase00_motion.sh'
         with open (shfilepath,'w+') as shfilew:
             for patientNo in range(0, len(self.patinfo.patientName)):
                 data_path = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + str(
@@ -58,7 +58,7 @@ class class_gen_ave_00_vois():
     def fun_gen_ph00_vois_exec(self): # generate file under: /u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/032_ave2ph00.exec
         print("start generate ave to phase00 vois command that could be run in TRiP")
         print(self.patinfo.patientName)
-        execfilepath='/u/ysheng/MyAIXd/projects/patients/commands/01-prepare4Ddata/012_ave2phase00_motion.exec'
+        execfilepath='/u/ysheng/MyAIXd/projects/patients/commands/012_ave2phase00_motion.exec'
         with open (execfilepath,'w+') as execfilew:
             for patientNo in range(0, len(self.patinfo.patientName)):
                 data_path = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + str(

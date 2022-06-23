@@ -75,9 +75,12 @@ class class_dose_recon_3D():
             # set DVH export information
             Plan_dvh='dvh  "'+write2dosepath+'total.bio" / calculate export(gd) \n'
             # write to specific exec file in each patient folder
-            createsh = path2patientEXE + self.motioninfo.patientID[specific_plan]+'/3Ddose/exec/'+ \
+            createexec = path2patientEXE + self.motioninfo.patientID[specific_plan]+'/3Ddose/exec/'+ \
                        self.motioninfo.planName[specific_plan]+'/'+self.motioninfo.planName[specific_plan]+'.exec'
-            with open(createsh, 'w+') as writesh:
-                writesh.writelines(Plan_basedata+Plan_hult+Plan_rbe_Table+Plan_ct+Plan_voi)
-                writesh.writelines(Plan_set_target_voi+Plan_rbe_model+Plan_setdose)
-                writesh.writelines(Plan_fieldinfo+Plan_doseinfo+Plan_dvh)
+            with open(createexec, 'w+') as writeexec:
+                writeexec.writelines(Plan_basedata+Plan_hult+Plan_rbe_Table+Plan_ct+Plan_voi)
+                writeexec.writelines(Plan_set_target_voi+Plan_rbe_model+Plan_setdose)
+                writeexec.writelines(Plan_fieldinfo+Plan_doseinfo+Plan_dvh+'quit')
+        def fun_create_3D_dose_run_sh(self):
+            print("start generating the running sh file")
+            createsh='/u/ysheng/MyAIXd/projects/commands/05_run3Dexec.sh'

@@ -8,9 +8,9 @@ class class_reg_4DCT():
         print("start registrate 4D CTs for all patients listed in patinfo.txt")
         print(self.patinfo.patientName)
         if path2patinfo.rfind('/')!=-1:
-            regshfile=path2patinfo[:path2patinfo.rfind('/')]+'02_CreatePlastimatch4D_motion.sh'
+            regshfile=path2patinfo[:path2patinfo.rfind('/')]+'02_CreatePlastimatch4D.sh'
         else:
-            regshfile = '/u/ysheng/MyAIXd/projects/patient/commands/01-prepare4Ddata//02_CreatePlastimatch4D.sh'
+            regshfile = '/u/ysheng/MyAIXd/projects/patient/commands/02_CreatePlastimatch4D.sh'
         with open(regshfile,'w+') as createplastimath:
             for patientNo in range(0,len(self.patinfo.patientName)):
                 createplastimath.writelines("#trying plastimatch in: "+self.patinfo.patientName[patientNo]+os.linesep)

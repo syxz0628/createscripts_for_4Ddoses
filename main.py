@@ -47,6 +47,10 @@ if __name__ == '__main__':
 
     CTinfo=read_CT_info.class_readpat_info(args.pat)
     CTinfo.fun_readpat_info()
+    if args.a20:
+        voi_3D=voi_ave2p00.class_gen_ave_00_vois(CTinfo)
+        voi_3D.fun_preparefile()
+        voi_3D.fun_gen_ph00_vois_exec()
     if args.reg:
         reg_cts=reg_4DCT.class_reg_4DCT(CTinfo)
         reg_cts.fun_auto_reg_4DCT(args.pat)
@@ -54,10 +58,6 @@ if __name__ == '__main__':
         voi_4D=voi_4D.class_gen_4D_vois(CTinfo)
         voi_4D.fun_preparefolder()
         voi_4D.fun_gen_4D_vois()
-    if args.a20:
-        voi_3D=voi_ave2p00.class_gen_ave_00_vois(CTinfo)
-        voi_3D.fun_preparefile()
-        voi_3D.fun_gen_ph00_vois_exec()
     if args.motionpath!=None:
         dafmbrdata=read_motion_info.class_readmotion_info(args.motionpath)
         dafmbrdata.fun_readpat_motion_info()
