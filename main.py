@@ -74,4 +74,4 @@ if __name__ == '__main__':
         print('Motion path with paramter "m" is necessary for output the lmdout file ')
         sys.exit()
     if args.temp:
-        tempinfo=temp_write_planinfo.class_temp()
+        tempinfo=temp_write_planinfo.class_temp(CTinfo, dafmbrdata)
