@@ -73,7 +73,7 @@ class class_dose_recon_3D():
             Plan_doseinfo = Plan_doseinfo +'dose "'+write2dosepath+'total" / field(*) '+'voi('+self.ctinfo.external[ctinfocount]+') '+\
                               'maxthreads(30) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
             # set DVH export information
-            Plan_dvh='dvh  "'+write2dosepath+'total.bio" / calculate export(gd) \n'
+            Plan_dvh='dvh  "'+write2dosepath+'total.bio" / calculate export(gd) bio\n'
             # write to specific exec file in each patient folder
             createexec = self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/3Ddose/exec/'+ \
                        self.motioninfo.planName[specific_plan]+'/'+self.motioninfo.planName[specific_plan]+'.exec'
