@@ -81,12 +81,12 @@ class class_dose_recon_3D():
                                         ctinfocount] + ') ' + \
                                     'maxthreads(30) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
             if self.motioninfo.ion_info[specific_plan] == 'S3C' or self.motioninfo.ion_info[specific_plan] == 'S6C':
-                Plan_doseinfoCarbon = Plan_doseinfo + 'dose "' + write2dosepath + 'total" / field(*) ' + 'voi(' + \
+                Plan_doseinfo = Plan_doseinfo + 'dose "' + write2dosepath + 'total" / field(*) ' + 'voi(' + \
                                       self.ctinfo.external[ctinfocount] + ') ' + \
                                       'maxthreads(30) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
                 Plan_dvh = 'dvh  "' + write2dosepath + 'total.bio" / calculate export(gd) bio\n'
             elif self.motioninfo.ion_info[specific_plan]=='S1H':
-                Plan_doseinfoCarbon = Plan_doseinfo + 'dose "' + write2dosepath + 'total" / field(*) ' + 'voi(' + \
+                Plan_doseinfo = Plan_doseinfo + 'dose "' + write2dosepath + 'total" / field(*) ' + 'voi(' + \
                                       self.ctinfo.external[ctinfocount] + ') ' + \
                                       'maxthreads(30) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
                 Plan_dvh = 'dvh  "' + write2dosepath + 'total.phys" / calculate export(gd)\n'
