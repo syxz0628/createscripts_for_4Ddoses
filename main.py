@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--pat", required=True,
-                        help="patient info file folder,check /u/ysheng/MyAIXd/projects/patient/commands/01-prepare4Ddata/patient_info.txt for format.")
+                        help="patient info file folder,check /u/ysheng/MyAIXd/projects/patient/commands/patient_info.txt for format.")
     parser.add_argument("-a", "--a20", required=False, action='store_true',
                         help="Generate/Print exec for reg and generate vois for phase 00 from average 3D vois. Necessary info in patient: id, name, ct folder. sh file written in /patient/commands/01-prepare4Ddata/03_3Dvois_ave_phase00.sh")
     parser.add_argument("-r", "--reg", required=False, action='store_true',
