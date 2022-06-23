@@ -61,10 +61,11 @@ class class_dose_recon_3D():
                                  self.motioninfo.gantry[specific_plan][temp] +') target(' + \
                                  self.motioninfo.targetX[specific_plan][temp] + ',' + \
                                  self.motioninfo.targetY[specific_plan][temp] + ',' + \
-                                 self.motioninfo.targetZ[specific_plan][temp] + ') doseext(1.4862) noreg'
-                if self.motioninfo.bolus[specific_plan][temp]!='0':
-                    Plan_fieldinfo=Plan_fieldinfo+'bolus('+self.motioninfo.bolus[specific_plan][temp]+')'
-                Plan_fieldinfo=Plan_fieldinfo+'\n'
+                                 self.motioninfo.targetZ[specific_plan][temp] + ') doseext(1.4862) noreg '
+                if self.motioninfo.bolus[specific_plan][temp]=='0':
+                    Plan_fieldinfo=Plan_fieldinfo+'bolus(0) \n'
+                else:
+                    Plan_fieldinfo = Plan_fieldinfo + 'bolus(' + self.motioninfo.bolus[specific_plan][temp] + ') \n'
             # set dose information
             Plan_doseinfo=''
             write2dosepath=self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'/3Ddose/dose/'+ \
@@ -86,7 +87,7 @@ class class_dose_recon_3D():
                 writeexec.writelines(Plan_fieldinfo+Plan_doseinfo+Plan_dvh+'quit')
     def fun_create_3D_dose_run_sh(self):
         print("start generating the running sh file")
-        createsh='/u/ysheng/MyAIXd/projects/patients/commands/05_run3Dexec.sh'
+        createsh='/u/ysheng/MyAIXd/projects/patients/commands/05_run3Dexec_local.sh'
         headinfo='echo \'This script will run all 3D dose reconstruct plans\' \n'
         with open (createsh,'w+') as writesh:
             writesh.writelines(headinfo)
