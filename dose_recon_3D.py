@@ -71,13 +71,27 @@ class class_dose_recon_3D():
             write2dosepath=self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'/3Ddose/dose/'+ \
                            self.motioninfo.planName[specific_plan]+'/'
             for temp in range(0, int(self.motioninfo.fieldNo[specific_plan])):
-                Plan_doseinfo=Plan_doseinfo+'dose "'+write2dosepath+self.motioninfo.beamName[specific_plan][temp]+\
-                              '" / field('+str(temp+1)+') '+'voi('+self.ctinfo.external[ctinfocount]+') '+\
-                              'maxthreads(30) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
-            Plan_doseinfo = Plan_doseinfo +'dose "'+write2dosepath+'total" / field(*) '+'voi('+self.ctinfo.external[ctinfocount]+') '+\
-                              'maxthreads(30) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                if self.motioninfo.ion_info[specific_plan]=='S3C' or self.motioninfo.ion_info[specific_plan]=='S6C':
+                    Plan_doseinfo=Plan_doseinfo+'dose "'+write2dosepath+self.motioninfo.beamName[specific_plan][temp]+\
+                                  '" / field('+str(temp+1)+') '+'voi('+self.ctinfo.external[ctinfocount]+') '+\
+                                  'maxthreads(30) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                elif self.motioninfo.ion_info[specific_plan]=='S1H':
+                    Plan_doseinfo = Plan_doseinfo + 'dose "' + write2dosepath + self.motioninfo.beamName[specific_plan][temp] + \
+                                    '" / field(' + str(temp + 1) + ') ' + 'voi(' + self.ctinfo.external[
+                                        ctinfocount] + ') ' + \
+                                    'maxthreads(30) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+            if self.motioninfo.ion_info[specific_plan] == 'S3C' or self.motioninfo.ion_info[specific_plan] == 'S6C':
+                Plan_doseinfoCarbon = Plan_doseinfo + 'dose "' + write2dosepath + 'total" / field(*) ' + 'voi(' + \
+                                      self.ctinfo.external[ctinfocount] + ') ' + \
+                                      'maxthreads(30) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                Plan_dvh = 'dvh  "' + write2dosepath + 'total.bio" / calculate export(gd) bio\n'
+            elif self.motioninfo.ion_info[specific_plan]=='S1H':
+                Plan_doseinfoCarbon = Plan_doseinfo + 'dose "' + write2dosepath + 'total" / field(*) ' + 'voi(' + \
+                                      self.ctinfo.external[ctinfocount] + ') ' + \
+                                      'maxthreads(30) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                Plan_dvh = 'dvh  "' + write2dosepath + 'total.phys" / calculate export(gd)\n'
             # set DVH export information
-            Plan_dvh='dvh  "'+write2dosepath+'total.bio" / calculate export(gd) bio\n'
+
             # write to specific exec file in each patient folder
             createexec = self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/3Ddose/exec/'+ \
                        self.motioninfo.planName[specific_plan]+'/'+self.motioninfo.planName[specific_plan]+'.exec'
