@@ -8,6 +8,7 @@ import reg_4DCT
 import voi_4D
 import voi_ave2p00
 import dose_recon_3D
+import dose_recon_4D
 import temp_write_planinfo
 
 if __name__ == '__main__':
@@ -26,9 +27,9 @@ if __name__ == '__main__':
     parser.add_argument("-L", "--lmdoutsh", required=False, action='store_true',
                         help="write script to generate the lmdout info for each plans.")
     parser.add_argument("-T", "--ThreeDrec", required=False, action='store_true',
-                        help="Generate 3D plans exec files.")
-    parser.add_argument("-F", "--FourDplan", required=False, action='store_true',
-                        help="Generate 4D plans exec files.")
+                        help="Generate 3D plans exec files and sh file.")
+    parser.add_argument("-F", "--FourDrec", required=False, action='store_true',
+                        help="Generate 4D plans exec files and sh file.")
     parser.add_argument("-t", "--temp", required=False, action='store_true',
                         help="Write some tempinfo.")
     # parser.add_argument("-s","--showfigs", required=False,  action='store_true', help="show daf and related figures", default="False")
@@ -71,6 +72,13 @@ if __name__ == '__main__':
         dose_recon_3D_exec=dose_recon_3D.class_dose_recon_3D(CTinfo,dafmbrdata)
         dose_recon_3D_exec.fun_create_3D_dose_recon_exec()
         dose_recon_3D_exec.fun_create_3D_dose_run_sh()
+    elif args.ThreeDrec:
+        print('Path 2 file for patient plan and motion paramters "-m" is necessary for generate the 3D plan')
+        sys.exit()
+    if args.FourDrec and args.motionpath!=None:  # output 3D plan exec file.
+        dose_recon_4D_exec=dose_recon_4D.class_dose_recon_4D(CTinfo,dafmbrdata)
+        dose_recon_4D_exec.fun_create_4D_dose_recon_exec()
+        dose_recon_4D_exec.fun_create_4D_dose_run_sh()
     elif args.ThreeDrec:
         print('Path 2 file for patient plan and motion paramters "-m" is necessary for generate the 3D plan')
         sys.exit()

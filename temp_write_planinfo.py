@@ -27,8 +27,11 @@ class class_temp():
                 Fddose = self.motioninfo.patientID[tempNumber] + '/4DdoseRecon/dose/'
                 Tdexec = self.motioninfo.patientID[tempNumber] + '/3Ddose/exec/'
                 Fdexec = self.motioninfo.patientID[tempNumber] + '/4DdoseRecon/exec/'
-                rmcommand3D = rmfolder + Tddose + '* -rf'
-                rmcommand4D = rmfolder + Fddose + '* -rf'
+                dafexec=[]
+                dafdose=[]
+                for tempdafinfo in self.motioninfo.dafinfo[tempNumber]:
+                    dafexec=patientpath+Fdexec+ self.motioninfo.planName[tempNumber]+tempdafinfo[:-4]
+                    dafdose=patientpath + Fddose+tempdafinfo[:-4]
                 mkdir3Ddose = patientpath + Tddose
                 mkdir43Ddose = patientpath + Fddose
                 mkdir3Dexec = patientpath + Tdexec
@@ -40,4 +43,7 @@ class class_temp():
                 writesh.writelines(
                      mkdir3Ddose + os.linesep + mkdir43Ddose + os.linesep + mkdir3D + os.linesep + mkdir4D + os.linesep+os.linesep)
                 writesh.writelines(
-                     mkdir3Dexec + os.linesep + mkdir43Dexec + os.linesep + mkdir3D2 + os.linesep + mkdir4D2 + os.linesep+os.linesep)
+                     mkdir3Dexec + os.linesep + mkdir43Dexec + os.linesep + mkdir3D2 + os.linesep + mkdir4D2 + os.linesep)
+                for temp in range(0, len(dafexec)):
+                    writesh.writelines(dafexec[temp]+os.linesep+dafdose[temp]+ os.linesep)
+                writesh.writelines(os.linesep+os.linesep)
