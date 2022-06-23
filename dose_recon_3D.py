@@ -83,7 +83,7 @@ class class_dose_recon_3D():
                 writeexec.writelines(Plan_fieldinfo+Plan_doseinfo+Plan_dvh+'quit')
     def fun_create_3D_dose_run_sh(self):
         print("start generating the running sh file")
-        createsh='/u/ysheng/MyAIXd/projects/commands/05_run3Dexec.sh'
+        createsh='/u/ysheng/MyAIXd/projects/patients/commands/05_run3Dexec.sh'
         headinfo='echo \'This script will run all 3D dose reconstruct plans\' \n'
         with open (createsh,'w+') as writesh:
             writesh.writelines(headinfo)
