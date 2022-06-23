@@ -17,7 +17,9 @@ class class_temp():
                 Fddose=self.motioninfo.patientID[tempNumber]+'/4DdoseRecon/dose/'
                 rmcommand3D=  rmfolder + Tddose+'* -rf'
                 rmcommand4D = rmfolder + Fddose + '* -rf'
+                mkdir3Ddose=patientpath+Tddose
+                mkdir43Ddose = patientpath + Fddose
                 mkdir3D=patientpath+Tddose+self.motioninfo.planName[tempNumber]
                 mkdir4D = patientpath + Fddose + self.motioninfo.planName[tempNumber]
-                writesh.writelines(rmcommand3D+os.linesep+mkdir3D+os.linesep+rmcommand4D+os.linesep+mkdir4D+os.linesep)
+                writesh.writelines(rmcommand3D+os.linesep+rmcommand4D+os.linesep+mkdir3Ddose+os.linesep+mkdir43Ddose+os.linesep+mkdir3D+os.linesep+mkdir4D+os.linesep)
 
