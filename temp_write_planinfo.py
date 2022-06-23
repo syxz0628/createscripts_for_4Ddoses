@@ -36,9 +36,9 @@ class class_temp():
                 mkdir3D2 = patientpath + Tdexec + self.motioninfo.planName[tempNumber]
                 mkdir4D2 = patientpath + Fdexec + self.motioninfo.planName[tempNumber]
                 writesh.writelines(
-                     mkdir3Ddose + os.linesep + mkdir43Ddose + os.linesep + mkdir3D + os.linesep + mkdir4D + os.linesep+os.linesep)
+                     mkdir3Ddose + os.linesep + mkdir43Ddose + os.linesep + mkdir3D + os.linesep + mkdir4D + os.linesep)
                 writesh.writelines(
-                     mkdir3Dexec + os.linesep + mkdir43Dexec + os.linesep + mkdir3D2 + os.linesep + mkdir4D2 + os.linesep)
+                     mkdir3Dexec + os.linesep + mkdir43Dexec + os.linesep + mkdir3D2 + os.linesep + mkdir4D2 + os.linesep+os.linesep)
                 for temp in range(0, len(dafexec)):
                     writesh.writelines(dafexec[temp]+os.linesep+dafdose[temp]+ os.linesep)
                 writesh.writelines(os.linesep+os.linesep)
