@@ -15,14 +15,9 @@ class class_temp():
                 Fddose=self.motioninfo.patientID[tempNumber]+'/4DdoseRecon/dose/'
                 rmcommand3D=  rmfolder + Tddose+'* -rf'
                 rmcommand4D = rmfolder + Fddose + '* -rf'
-                mkdir3Ddose=patientpath+Tddose
-                mkdir43Ddose = patientpath + Fddose
-                mkdir3D=patientpath+Tddose+self.motioninfo.planName[tempNumber]
-                mkdir4D = patientpath + Fddose + self.motioninfo.planName[tempNumber]
                 writesh.writelines(rmcommand3D+os.linesep+rmcommand4D+os.linesep)
             for tempNumber in range(0, len(self.motioninfo.planName)):
                 patientpath = 'mkdir /u/ysheng/MyAIXd/projects/patients/'
-                rmfolder = 'rm /u/ysheng/MyAIXd/projects/patients/'
                 Tddose = self.motioninfo.patientID[tempNumber] + '/3Ddose/dose/'
                 Fddose = self.motioninfo.patientID[tempNumber] + '/4DdoseRecon/dose/'
                 Tdexec = self.motioninfo.patientID[tempNumber] + '/3Ddose/exec/'
@@ -30,8 +25,8 @@ class class_temp():
                 dafexec=[]
                 dafdose=[]
                 for tempdafinfo in self.motioninfo.dafinfo[tempNumber]:
-                    dafexec.append(patientpath+Fdexec+ self.motioninfo.planName[tempNumber]+tempdafinfo[:-4])
-                    dafdose.append(patientpath + Fddose+tempdafinfo[:-4])
+                    dafexec.append(patientpath+Fdexec+ self.motioninfo.planName[tempNumber]+'/'+tempdafinfo[:-4])
+                    dafdose.append(patientpath + self.motioninfo.planName[tempNumber]+'/'+Fddose+tempdafinfo[:-4])
                 mkdir3Ddose = patientpath + Tddose
                 mkdir43Ddose = patientpath + Fddose
                 mkdir3Dexec = patientpath + Tdexec
