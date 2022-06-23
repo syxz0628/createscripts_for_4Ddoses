@@ -30,8 +30,8 @@ class class_temp():
                 dafexec=[]
                 dafdose=[]
                 for tempdafinfo in self.motioninfo.dafinfo[tempNumber]:
-                    dafexec=patientpath+Fdexec+ self.motioninfo.planName[tempNumber]+tempdafinfo[:-4]
-                    dafdose=patientpath + Fddose+tempdafinfo[:-4]
+                    dafexec.append(patientpath+Fdexec+ self.motioninfo.planName[tempNumber]+tempdafinfo[:-4])
+                    dafdose.append(patientpath + Fddose+tempdafinfo[:-4])
                 mkdir3Ddose = patientpath + Tddose
                 mkdir43Ddose = patientpath + Fddose
                 mkdir3Dexec = patientpath + Tdexec
