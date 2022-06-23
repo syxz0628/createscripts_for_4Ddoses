@@ -61,7 +61,10 @@ class class_dose_recon_3D():
                                  self.motioninfo.gantry[specific_plan][temp] +') target(' + \
                                  self.motioninfo.targetX[specific_plan][temp] + ',' + \
                                  self.motioninfo.targetY[specific_plan][temp] + ',' + \
-                                 self.motioninfo.targetZ[specific_plan][temp] + ') doseext(1.4862) noreg \n'
+                                 self.motioninfo.targetZ[specific_plan][temp] + ') doseext(1.4862) noreg'
+                if self.motioninfo.bolus[specific_plan][temp]!='0':
+                    Plan_fieldinfo=Plan_fieldinfo+'bolus('+self.motioninfo.bolus[specific_plan][temp]+')'
+                Plan_fieldinfo=Plan_fieldinfo+'\n'
             # set dose information
             Plan_doseinfo=''
             write2dosepath=self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'/3Ddose/dose/'+ \
