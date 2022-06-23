@@ -45,7 +45,7 @@ class class_dose_recon_3D():
                       self.motioninfo.ctName[specific_plan] + '/vois/3D/Average/' + self.motioninfo.patientName[
                           specific_plan] + '" / read select('+Plan_targetname+','+Plan_oarname+','+Plan_external+') \n'
              # set target voi
-            Plan_set_target_voi='voi "'+self.ctinfo.targetName[ctinfocount][0]+' / targetset \n'
+            Plan_set_target_voi='voi "'+self.ctinfo.targetName[ctinfocount][0]+'" / targetset \n'
             # set rbe model
             Plan_rbe_model='rbe "'+self.ctinfo.external[ctinfocount]+'" / alias(chordom02) \n'
             # set plan dose
@@ -80,4 +80,4 @@ class class_dose_recon_3D():
             with open(createsh, 'w+') as writesh:
                 writesh.writelines(Plan_basedata+Plan_hult+Plan_rbe_Table+Plan_ct+Plan_voi)
                 writesh.writelines(Plan_set_target_voi+Plan_rbe_model+Plan_setdose)
-                writesh.writelines(Plan_fieldinfo+Plan_doseinfo)
+                writesh.writelines(Plan_fieldinfo+Plan_doseinfo+Plan_dvh)
