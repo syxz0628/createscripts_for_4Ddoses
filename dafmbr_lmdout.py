@@ -7,7 +7,7 @@ class class_dafmbr_lmdout_script():
         self.ctinfo=ctinfo
         self.motioninfo=motioninfo
         self.fileversion = 1.0
-    def fun_create_lmdout_exec(self):
+    def fun_create_lmdout_sh(self):
         print("start create sh for all plans listed in patient_motioninfo.txt")
         print(self.motioninfo.patientName)
         path2script='python3 /u/ysheng/MyAIXd/projects/Daf_mbr2mpos_lmdout/main.py -d '

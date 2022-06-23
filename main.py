@@ -1,3 +1,4 @@
+import sys
 import dafmbr_lmdout
 import read_CT_info
 import read_motion_info
@@ -6,7 +7,7 @@ import argparse
 import reg_4DCT
 import voi_4D
 import voi_ave2p00
-import create_3Dplan
+import dose_recon_3D
 import temp_write_planinfo
 
 if __name__ == '__main__':
@@ -21,8 +22,10 @@ if __name__ == '__main__':
     parser.add_argument("-v", "--voi", required=False, action='store_true',
                         help="Generate/Print exec for generate 4D vois from trafo and 3D vois. Necessary info in patient: id, name, ct folder and write to exec file path. makesure 00 is the reference image")
     parser.add_argument("-m", "--motionpath", required=False, nargs='?',
+                        help="path to motion info folder, required if -L, -T, -F exist")
+    parser.add_argument("-L", "--lmdoutsh", required=False, action='store_true',
                         help="write script to generate the lmdout info for each plans.")
-    parser.add_argument("-T", "--ThreeDplan", required=False, action='store_true',
+    parser.add_argument("-T", "--ThreeDrec", required=False, action='store_true',
                         help="Generate 3D plans exec files.")
     parser.add_argument("-F", "--FourDplan", required=False, action='store_true',
                         help="Generate 4D plans exec files.")
@@ -58,10 +61,17 @@ if __name__ == '__main__':
     if args.motionpath!=None:
         dafmbrdata=read_motion_info.class_readmotion_info(args.motionpath)
         dafmbrdata.fun_readpat_motion_info()
+    if args.lmdoutsh and args.motionpath!=None: # output lmdout sh
         creatlmdoutsh=dafmbr_lmdout.class_dafmbr_lmdout_script(CTinfo,dafmbrdata)
-        creatlmdoutsh.fun_create_lmdout_exec()
-    if args.ThreeDplan:
-        create_3Dplan_sh=create_3Dplan.class_create3Dplan()
-        create_3Dplan_sh.fun_create_3Dplan_exec()
+        creatlmdoutsh.fun_create_lmdout_sh()
+    elif args.lmdoutsh:
+        print('Motion path with paramter "m" is necessary for output the lmdout file ')
+        sys.exit()
+    if args.ThreeDrec and args.motionpath!=None:  # output 3D plan exec file.
+        dose_recon_3D_exec=dose_recon_3D.class_dose_recon_3D()
+        dose_recon_3D_exec.fun_create_3D_dose_recon_exec()
+    elif args.ThreeDrec:
+        print('Motion path with paramter "m" is necessary for output the lmdout file ')
+        sys.exit()
     if args.temp:
         tempinfo=temp_write_planinfo.class_temp()
