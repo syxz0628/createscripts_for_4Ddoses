@@ -89,8 +89,8 @@ class class_dose_recon_3D():
             writesh.writelines(headinfo)
             for specific_plan in range(0, len(self.motioninfo.planName)):
                 planheadinfo = 'echo \'Running the plan:' + self.motioninfo.planName[
-                    specific_plan] + ' for patient:' + self.motioninfo.patientName + '\'\n'
+                    specific_plan] + ' for patient:' + self.motioninfo.patientName[specific_plan] + '\'\n'
                 cd2execfolder='cd '+self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/3Ddose/exec/'+ \
                        self.motioninfo.planName[specific_plan]+'/ \n'
-                runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+'-l \n\n'
+                runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+' -l \n\n'
                 writesh.writelines(planheadinfo+cd2execfolder+runexec)
