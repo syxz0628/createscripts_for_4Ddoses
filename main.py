@@ -65,13 +65,13 @@ if __name__ == '__main__':
         creatlmdoutsh=dafmbr_lmdout.class_dafmbr_lmdout_script(CTinfo,dafmbrdata)
         creatlmdoutsh.fun_create_lmdout_sh()
     elif args.lmdoutsh:
-        print('Motion path with paramter "m" is necessary for output the lmdout file ')
+        print('Path 2 file for patient plan and motion paramters "-m" is necessary for output the lmdout file ')
         sys.exit()
     if args.ThreeDrec and args.motionpath!=None:  # output 3D plan exec file.
-        dose_recon_3D_exec=dose_recon_3D.class_dose_recon_3D()
+        dose_recon_3D_exec=dose_recon_3D.class_dose_recon_3D(CTinfo,dafmbrdata)
         dose_recon_3D_exec.fun_create_3D_dose_recon_exec()
     elif args.ThreeDrec:
-        print('Motion path with paramter "m" is necessary for output the lmdout file ')
+        print('Path 2 file for patient plan and motion paramters "-m" is necessary for generate the 3D plan')
         sys.exit()
     if args.temp:
         tempinfo=temp_write_planinfo.class_temp(CTinfo, dafmbrdata)

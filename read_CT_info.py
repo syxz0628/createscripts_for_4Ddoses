@@ -9,7 +9,7 @@ class class_readpat_info:
         self.oarName=[]
         self.targetName=[]
         self.plannumber=[]
-        self.external=''
+        self.external=[]
     def fun_readpat_info(self):
         countlines=0
         with open(self.pat_info_path) as patfile:
@@ -30,7 +30,7 @@ class class_readpat_info:
                     elif 'TV' in useinfo: # oar and target
                         self.targetName[-1].append(useinfo)
                     elif useinfo == basicinfo[-1]:
-                        self.external = useinfo
+                        self.external.append(useinfo)
                     else:
                         self.oarName[-1].append(useinfo)
 
