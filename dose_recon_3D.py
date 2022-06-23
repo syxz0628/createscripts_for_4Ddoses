@@ -81,16 +81,16 @@ class class_dose_recon_3D():
                 writeexec.writelines(Plan_basedata+Plan_hult+Plan_rbe_Table+Plan_ct+Plan_voi)
                 writeexec.writelines(Plan_set_target_voi+Plan_rbe_model+Plan_setdose)
                 writeexec.writelines(Plan_fieldinfo+Plan_doseinfo+Plan_dvh+'quit')
-        def fun_create_3D_dose_run_sh(self):
-            print("start generating the running sh file")
-            createsh='/u/ysheng/MyAIXd/projects/commands/05_run3Dexec.sh'
-            headinfo='echo \'This script will run all 3D dose reconstruct plans\' \n'
-            with open (createsh,'w+') as writesh:
-                writesh.writelines(headinfo)
-                for specific_plan in range(0, len(self.motioninfo.planName)):
-                    planheadinfo = 'echo \'Running the plan:' + self.motioninfo.planName[
-                        specific_plan] + ' for patient:' + self.motioninfo.patientName + '\'\n'
-                    cd2execfolder='cd '+self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/3Ddose/exec/'+ \
-                           self.motioninfo.planName[specific_plan]+'/ \n'
-                    runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+'-l \n\n'
-                    writesh.writelines(planheadinfo+cd2execfolder+runexec)
+    def fun_create_3D_dose_run_sh(self):
+        print("start generating the running sh file")
+        createsh='/u/ysheng/MyAIXd/projects/commands/05_run3Dexec.sh'
+        headinfo='echo \'This script will run all 3D dose reconstruct plans\' \n'
+        with open (createsh,'w+') as writesh:
+            writesh.writelines(headinfo)
+            for specific_plan in range(0, len(self.motioninfo.planName)):
+                planheadinfo = 'echo \'Running the plan:' + self.motioninfo.planName[
+                    specific_plan] + ' for patient:' + self.motioninfo.patientName + '\'\n'
+                cd2execfolder='cd '+self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/3Ddose/exec/'+ \
+                       self.motioninfo.planName[specific_plan]+'/ \n'
+                runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+'-l \n\n'
+                writesh.writelines(planheadinfo+cd2execfolder+runexec)
