@@ -75,3 +75,4 @@ if __name__ == '__main__':
         sys.exit()
     if args.temp:
         tempinfo=temp_write_planinfo.class_temp(CTinfo, dafmbrdata)
+        tempinfo.fun_tempwrite()
