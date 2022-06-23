@@ -1,6 +1,4 @@
 import os
-
-
 class class_temp():
     def __init__(self,ctinfo,motioninfo):
         self.ctinfo=ctinfo

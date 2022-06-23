@@ -6,10 +6,10 @@ class class_dose_recon_3D():
         self.ctinfo=ctinfo
         self.motioninfo=motioninfo
         self.fileversion = 1.0
+        self.path2patientEXE = '/u/ysheng/MyAIXd/projects/patients/'
+        self.path2patientData = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/'
     def fun_create_3D_dose_recon_exec(self):
         print("start create 3D dose reconstruction exec for all plans listed in patient_motioninfo.txt")
-        path2patientEXE='/u/ysheng/MyAIXd/projects/patients/'
-        path2patientData = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/'
         for specific_plan in range(0, len(self.motioninfo.planName)):
             print('start to write 3D plan: ' + self.motioninfo.planName[specific_plan] + ' for patient:' +
                   self.motioninfo.patientName[specific_plan])
@@ -28,7 +28,7 @@ class class_dose_recon_3D():
             # selection of rbe model
             Plan_rbe_Table='rbe  "/u/motion/AIXd/user/motion/Data/TRiP98DATA/chordom*.rbe" / read \n'
             # selection of CT (Average for 3D plan)
-            Plan_ct = 'ct "' + path2patientData + self.motioninfo.patientID[specific_plan] + '/' + \
+            Plan_ct = 'ct "' + self.path2patientData + self.motioninfo.patientID[specific_plan] + '/' + \
                       self.motioninfo.ctName[specific_plan] + '/ctx/Average/' + self.motioninfo.patientName[
                           specific_plan] + '" / read \n'
             # selection of voi
@@ -41,7 +41,7 @@ class class_dose_recon_3D():
                         Plan_external=self.ctinfo.external[ctinfocount]
                         break
              # set voi (average for 3D plan)
-            Plan_voi = 'voi "' + path2patientData + self.motioninfo.patientID[specific_plan] + '/' + \
+            Plan_voi = 'voi "' + self.path2patientData + self.motioninfo.patientID[specific_plan] + '/' + \
                       self.motioninfo.ctName[specific_plan] + '/vois/3D/Average/' + self.motioninfo.patientName[
                           specific_plan] + '" / read select('+Plan_targetname+','+Plan_oarname+','+Plan_external+') \n'
              # set target voi
@@ -53,7 +53,7 @@ class class_dose_recon_3D():
             # set field information
             Plan_fieldinfo=''
             for temp in range(0, int(self.motioninfo.fieldNo[specific_plan])):
-                Plan_fieldinfo = Plan_fieldinfo+'field ' + str(temp + 1) + ' / read file(' + path2patientData + \
+                Plan_fieldinfo = Plan_fieldinfo+'field ' + str(temp + 1) + ' / read file(' + self.path2patientData + \
                                  self.motioninfo.patientID[specific_plan] + '/' + \
                                  self.motioninfo.path2Plan[specific_plan][temp] + '/' + \
                                  self.motioninfo.beamName[specific_plan][temp] + '.rst) couch(' + \
@@ -64,7 +64,7 @@ class class_dose_recon_3D():
                                  self.motioninfo.targetZ[specific_plan][temp] + ') doseext(1.4862) noreg \n'
             # set dose information
             Plan_doseinfo=''
-            write2dosepath=path2patientEXE+self.motioninfo.patientID[specific_plan]+'/3Ddose/dose/'+ \
+            write2dosepath=self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'/3Ddose/dose/'+ \
                            self.motioninfo.planName[specific_plan]+'/'
             for temp in range(0, int(self.motioninfo.fieldNo[specific_plan])):
                 Plan_doseinfo=Plan_doseinfo+'dose "'+write2dosepath+self.motioninfo.beamName[specific_plan][temp]+\
@@ -75,7 +75,7 @@ class class_dose_recon_3D():
             # set DVH export information
             Plan_dvh='dvh  "'+write2dosepath+'total.bio" / calculate export(gd) \n'
             # write to specific exec file in each patient folder
-            createexec = path2patientEXE + self.motioninfo.patientID[specific_plan]+'/3Ddose/exec/'+ \
+            createexec = self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/3Ddose/exec/'+ \
                        self.motioninfo.planName[specific_plan]+'/'+self.motioninfo.planName[specific_plan]+'.exec'
             with open(createexec, 'w+') as writeexec:
                 writeexec.writelines(Plan_basedata+Plan_hult+Plan_rbe_Table+Plan_ct+Plan_voi)
@@ -84,3 +84,13 @@ class class_dose_recon_3D():
         def fun_create_3D_dose_run_sh(self):
             print("start generating the running sh file")
             createsh='/u/ysheng/MyAIXd/projects/commands/05_run3Dexec.sh'
+            headinfo='echo \'This script will run all 3D dose reconstruct plans\' \n'
+            with open (createsh,'w+') as writesh:
+                writesh.writelines(headinfo)
+                for specific_plan in range(0, len(self.motioninfo.planName)):
+                    planheadinfo = 'echo \'Running the plan:' + self.motioninfo.planName[
+                        specific_plan] + ' for patient:' + self.motioninfo.patientName + '\'\n'
+                    cd2execfolder='cd '+self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/3Ddose/exec/'+ \
+                           self.motioninfo.planName[specific_plan]+'/ \n'
+                    runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+'-l \n\n'
+                    writesh.writelines(planheadinfo+cd2execfolder+runexec)

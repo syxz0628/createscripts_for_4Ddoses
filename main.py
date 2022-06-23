@@ -70,6 +70,7 @@ if __name__ == '__main__':
     if args.ThreeDrec and args.motionpath!=None:  # output 3D plan exec file.
         dose_recon_3D_exec=dose_recon_3D.class_dose_recon_3D(CTinfo,dafmbrdata)
         dose_recon_3D_exec.fun_create_3D_dose_recon_exec()
+        dose_recon_3D_exec.fun_create_3D_dose_run_sh()
     elif args.ThreeDrec:
         print('Path 2 file for patient plan and motion paramters "-m" is necessary for generate the 3D plan')
         sys.exit()
