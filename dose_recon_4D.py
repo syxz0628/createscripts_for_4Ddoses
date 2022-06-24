@@ -69,7 +69,9 @@ class class_dose_recon_4D():
                 path_list = os.listdir(motion_lmdout_folder)
                 # write each filed info for specific daf file.
                 for specific_field in range(0, int(self.motioninfo.fieldNo[specific_plan])):
-                    # write one field normal information
+                    print('#start write daf: ', self.motioninfo.dafinfo[specific_plan][specific_daf])
+                    print('##start write field: ', self.motioninfo.fieldNo[specific_plan][specific_field])
+                    # write one field information
                     Plan_field_info.append('field ' + str(specific_field + 1) + ' / read rst(' + self.path2patientData + \
                                      self.motioninfo.patientID[specific_plan] + '/' + \
                                      self.motioninfo.path2Plan[specific_plan][specific_field] + '/' + \
