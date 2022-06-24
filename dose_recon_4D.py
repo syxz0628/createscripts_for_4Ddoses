@@ -158,7 +158,7 @@ class class_dose_recon_4D():
                              '/'+self.motioninfo.planName[specific_plan]+'.exec'
                 with open(createexec, 'w+') as writeexec:
                     writeexec.writelines(Plan_basedata+Plan_hult+Plan_rbe_Table+Plan_ct+Plan_voi)
-                    writeexec.writelines(Plan_set_target_voi+Plan_rbe_model+Plan_setdose)
+                    writeexec.writelines(Plan_set_target_voi+Plan_trafo+Plan_rbe_model+Plan_setdose)
                     writeexec.writelines('\n'+temp for temp in Plan_field_info)
                     writeexec.writelines(Plan_doseinfo+Plan_dvh+'quit')
     def fun_create_4D_dose_run_sh(self):
