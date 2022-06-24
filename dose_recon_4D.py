@@ -113,7 +113,7 @@ class class_dose_recon_4D():
                     # write motion lmdout information to one field
                     Plan_field_info[-1] = Plan_field_info[-1] + 'field ' + str(specific_field + 1) + ' / spill(' + Path2motion_lmdout+')\n'
                     # write create to one field
-                    Plan_field_info[-1] = Plan_field_info[-1] + 'field ' + str(specific_field + 1) + ' create \n\n'
+                    Plan_field_info[-1] = Plan_field_info[-1] + 'field ' + str(specific_field + 1) + ' / create \n\n'
                 ######
                 ###### set dose information, write in exec after field.
                 ######
