@@ -62,9 +62,9 @@ class class_dose_recon_4D():
             for specific_daf in range(0, len(self.motioninfo.dafinfo)):
                 Path2motion = self.path2patientEXE + self.motioninfo.patientID[
                     specific_plan] + '/4DdoseRecon/motion/' + self.motioninfo.planName[specific_plan] + '_' + \
-                                   self.motioninfo.dafinfo[specific_daf][:-4]
+                                   self.motioninfo.dafinfo[specific_plan][specific_daf][:-4]
                 Path2motion_mpos = Path2motion + '/mpos/' + \
-                                   self.motioninfo.dafinfo[specific_daf][:-4] + '.mpos'
+                                   self.motioninfo.dafinfo[specific_plan][specific_daf][:-4] + '.mpos'
                 motion_lmdout_folder = Path2motion + '/lmdout/'
                 path_list = os.listdir(motion_lmdout_folder)
                 # write each filed info for specific daf file.
@@ -117,7 +117,7 @@ class class_dose_recon_4D():
                 ######
                 Plan_doseinfo = ''
                 write2dosepath = self.path2patientEXE + self.motioninfo.patientID[specific_plan] + '/4DdoseRecon/dose/' + \
-                                 self.motioninfo.planName[specific_plan] + '/' + self.motioninfo.dafinfo[specific_daf]+'/'
+                                 self.motioninfo.planName[specific_plan] + '/' + self.motioninfo.dafinfo[specific_plan][specific_daf]+'/'
 
                 for temp in range(0, int(self.motioninfo.fieldNo[specific_plan])):
                     if self.motioninfo.ion_info[specific_plan] == 'S3C' or self.motioninfo.ion_info[specific_plan] == 'S6C':
@@ -152,7 +152,7 @@ class class_dose_recon_4D():
                 # each daf write an exec
                 ######
                 createexec = self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/4DdoseRecon/exec/' + \
-                             self.motioninfo.planName[specific_plan]+'/'+ self.motioninfo.dafinfo[specific_daf] + \
+                             self.motioninfo.planName[specific_plan]+'/'+ self.motioninfo.dafinfo[specific_plan][specific_daf] + \
                              +'/'+self.motioninfo.planName[specific_plan]+'.exec'
                 with open(createexec, 'w+') as writeexec:
                     writeexec.writelines(Plan_basedata+Plan_hult+Plan_rbe_Table+Plan_ct+Plan_voi)
@@ -173,18 +173,6 @@ class class_dose_recon_4D():
                 writesh.writelines(planheadinfo+cd2execfolder+runexec)
         print('running file generated in :')
         print('/u/ysheng/MyAIXd/projects/patients/commands/05_run3Dexec_motion.sh')
-    def fun_get_motion_lmdout_info(self,specific_plan,specific_daf,specific_field):
-        path2rst = ''
-        path2motion = ''
-        path2lmdout = ''
-
-        patientIDstringMotion = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + self.motioninfo.patientID[
-            specific_plan]
-        patientIDstringLocal = '/u/ysheng/MyAIXd/projects/patients/' + self.motioninfo.patientID[specific_plan]
-
-        for dafNo in self.motioninfo.dafinfo[specific_plan]:
-            printinfo1 = '#For patient:' + self.motioninfo.patientName[specific_plan] + ' plan:' + \
-                         self.motioninfo.planName[specific_plan] + ' daf:' + dafNo
 
     def fun_get_rst_first_end_energy(self,path2rst):
         slice_Energy = []
