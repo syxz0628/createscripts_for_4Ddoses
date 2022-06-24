@@ -117,7 +117,7 @@ class class_dose_recon_4D():
                 ######
                 ###### set dose information, write in exec after field.
                 ######
-
+                Plan_doseinfo = ''
                 write2dosepath = self.path2patientEXE + self.motioninfo.patientID[specific_plan] + '/4DdoseRecon/dose/' + \
                                  self.motioninfo.planName[specific_plan] + '/' + self.motioninfo.dafinfo[specific_plan][specific_daf][:-4]+'/'
 
@@ -162,7 +162,6 @@ class class_dose_recon_4D():
                     writeexec.writelines('\n'+temp for temp in Plan_field_info)
                     writeexec.writelines(Plan_doseinfo+Plan_dvh+'quit')
                 Plan_field_info=[]
-                Plan_doseinfo = ''
     def fun_create_4D_dose_run_sh(self):
         print("start generating the running sh file")
         createsh='/u/ysheng/MyAIXd/projects/patients/commands/06_run4Dexec_local.sh'
