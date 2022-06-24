@@ -176,7 +176,7 @@ class class_dose_recon_4D():
                     cd2execfolder='cd '+self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/4DdoseRecon/exec/'+ \
                            self.motioninfo.planName[specific_plan]+'/'+self.motioninfo.dafinfo[specific_plan][specific_daf][:-4]+'/'+ '\n'
                     runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+'.exec -l \n\n'
-                    writesh.writelines(planheadinfo+plandafinfo+cd2execfolder+runexec)
+                    writesh.writelines(plandafinfo+cd2execfolder+runexec)
         print('~~~~~~~~~~~~~~~~~running file generated in :~~~~~~~~~~~~~~~')
         print('/u/ysheng/MyAIXd/projects/patients/commands/06_run4Dexec_local.sh')
 
