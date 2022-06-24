@@ -58,7 +58,6 @@ class class_dose_recon_4D():
             ######
             ###### set field information, write field before dose information.
             ######
-            Plan_field_info=[] #Plan_field_info[field1, field2,...]
             for specific_daf in range(0, len(self.motioninfo.dafinfo[specific_plan])):
                 Path2motion = self.path2patientEXE + self.motioninfo.patientID[
                     specific_plan] + '/4DdoseRecon/motion/' + self.motioninfo.planName[specific_plan] + '_' + \
@@ -68,6 +67,7 @@ class class_dose_recon_4D():
                 motion_lmdout_folder = Path2motion + '/lmdout/'
                 path_list = os.listdir(motion_lmdout_folder)
                 # write each filed info for specific daf file.
+                Plan_field_info = []  # Plan_field_info[field1, field2,...]
                 for specific_field in range(0, int(self.motioninfo.fieldNo[specific_plan])):
                     print('#start write daf: ', self.motioninfo.dafinfo[specific_plan][specific_daf])
                     print('##start write field: ', str(specific_field))
