@@ -160,8 +160,8 @@ class class_dose_recon_4D():
                     writeexec.writelines(Plan_field_info+Plan_doseinfo+Plan_dvh+'quit')
     def fun_create_4D_dose_run_sh(self):
         print("start generating the running sh file")
-        createsh='/u/ysheng/MyAIXd/projects/patients/commands/05_run3Dexec_local.sh'
-        headinfo='echo \'This script will run all 3D dose reconstruct plans\' \n'
+        createsh='/u/ysheng/MyAIXd/projects/patients/commands/06_run4Dexec_local.sh'
+        headinfo='echo \'This script will run all 4D dose reconstruct plans\' \n'
         with open (createsh,'w+') as writesh:
             writesh.writelines(headinfo)
             for specific_plan in range(0, len(self.motioninfo.planName)):
