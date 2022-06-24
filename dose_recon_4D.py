@@ -119,7 +119,7 @@ class class_dose_recon_4D():
                 ######
                 Plan_doseinfo = ''
                 write2dosepath = self.path2patientEXE + self.motioninfo.patientID[specific_plan] + '/4DdoseRecon/dose/' + \
-                                 self.motioninfo.planName[specific_plan] + '/' + self.motioninfo.dafinfo[specific_plan][specific_daf]+'/'
+                                 self.motioninfo.planName[specific_plan] + '/' + self.motioninfo.dafinfo[specific_plan][specific_daf][:-4]+'/'
 
                 for temp in range(0, int(self.motioninfo.fieldNo[specific_plan])):
                     if self.motioninfo.ion_info[specific_plan] == 'S3C' or self.motioninfo.ion_info[specific_plan] == 'S6C':
@@ -159,7 +159,8 @@ class class_dose_recon_4D():
                 with open(createexec, 'w+') as writeexec:
                     writeexec.writelines(Plan_basedata+Plan_hult+Plan_rbe_Table+Plan_ct+Plan_voi)
                     writeexec.writelines(Plan_set_target_voi+Plan_rbe_model+Plan_setdose)
-                    writeexec.writelines(Plan_field_info[-1]+Plan_doseinfo+Plan_dvh+'quit')
+                    writeexec.writelines(temp+'\n' for temp in Plan_field_info)
+                    writeexec.writelines(Plan_doseinfo+Plan_dvh+'quit')
     def fun_create_4D_dose_run_sh(self):
         print("start generating the running sh file")
         createsh='/u/ysheng/MyAIXd/projects/patients/commands/06_run4Dexec_local.sh'
