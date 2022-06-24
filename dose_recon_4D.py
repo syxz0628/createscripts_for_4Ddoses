@@ -30,7 +30,7 @@ class class_dose_recon_4D():
             Plan_rbe_Table='rbe  "/u/motion/AIXd/user/motion/Data/TRiP98DATA/chordom*.rbe" / read \n'
             # selection of CT (Average for 3D plan)
             Plan_ct = 'ct "' + self.path2patientData + self.motioninfo.patientID[specific_plan] + '/' + \
-                      self.motioninfo.ctName[specific_plan] + '/ctx/Average/' + self.motioninfo.patientName[
+                      self.motioninfo.ctName[specific_plan] + '/ctx/' + self.motioninfo.patientName[
                           specific_plan] + '" / read state(10) refstate(0) \n'
             # selection of voi
              # get voi info from CTinfo:
@@ -159,7 +159,7 @@ class class_dose_recon_4D():
                 with open(createexec, 'w+') as writeexec:
                     writeexec.writelines(Plan_basedata+Plan_hult+Plan_rbe_Table+Plan_ct+Plan_voi)
                     writeexec.writelines(Plan_set_target_voi+Plan_rbe_model+Plan_setdose)
-                    writeexec.writelines(temp+'\n' for temp in Plan_field_info)
+                    writeexec.writelines('\n'+temp for temp in Plan_field_info)
                     writeexec.writelines(Plan_doseinfo+Plan_dvh+'quit')
     def fun_create_4D_dose_run_sh(self):
         print("start generating the running sh file")
