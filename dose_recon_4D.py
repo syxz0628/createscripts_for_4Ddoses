@@ -169,15 +169,15 @@ class class_dose_recon_4D():
             writesh.writelines(headinfo)
             for specific_plan in range(0, len(self.motioninfo.planName)):
                 for specific_daf in range(0, len(self.motioninfo.dafinfo[specific_plan])):
-                    planheadinfo = 'echo \'Running the plan:' + self.motioninfo.planName[
-                        specific_plan] + ' for patient:' + self.motioninfo.patientName[specific_plan] + '\'\n'
-                    plandafinfo = 'echo \'#for daf:' + self.motioninfo.dafinfo[specific_plan][specific_daf] + '\'\n'
+                    planheadinfo = 'echo \'Running the plan ' + self.motioninfo.planName[
+                        specific_plan] + ' for patient ' + self.motioninfo.patientName[specific_plan] + '\'\n'
+                    plandafinfo = 'echo \'#for ' + self.motioninfo.dafinfo[specific_plan][specific_daf] + '\'\n'
                     cd2execfolder='cd '+self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/4DdoseRecon/exec/'+ \
-                           self.motioninfo.planName[specific_plan]+'/'+self.motioninfo.dafinfo[specific_plan][specific_daf]+'/'+ '\n'
+                           self.motioninfo.planName[specific_plan]+'/'+self.motioninfo.dafinfo[specific_plan][specific_daf][:-4]+'/'+ '\n'
                     runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+'.exec -l \n\n'
                     writesh.writelines(planheadinfo+plandafinfo+cd2execfolder+runexec)
         print('~~~~~~~~~~~~~~~~~running file generated in :~~~~~~~~~~~~~~~')
-        print('/u/ysheng/MyAIXd/projects/patients/commands/05_run3Dexec_motion.sh')
+        print('/u/ysheng/MyAIXd/projects/patients/commands/06_run4Dexec_local.sh')
 
     def fun_get_rst_first_end_energy(self,path2rst):
         slice_Energy = []
