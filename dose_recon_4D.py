@@ -59,11 +59,7 @@ class class_dose_recon_4D():
             ###### set field information, write field before dose information.
             ######
             Plan_field_info=[] #Plan_field_info[field1, field2,...]
-            for specific_daf in range(0, len(self.motioninfo.dafinfo)):
-                print(specific_plan)
-                print(specific_daf)
-                print(len(self.motioninfo.dafinfo))
-                print(self.motioninfo.dafinfo[specific_plan][specific_daf])
+            for specific_daf in range(0, len(self.motioninfo.dafinfo[specific_plan])):
                 Path2motion = self.path2patientEXE + self.motioninfo.patientID[
                     specific_plan] + '/4DdoseRecon/motion/' + self.motioninfo.planName[specific_plan] + '_' + \
                                    self.motioninfo.dafinfo[specific_plan][specific_daf][:-4]
