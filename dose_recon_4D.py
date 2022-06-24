@@ -168,9 +168,10 @@ class class_dose_recon_4D():
         with open (createsh,'w+') as writesh:
             writesh.writelines(headinfo)
             for specific_plan in range(0, len(self.motioninfo.planName)):
+                planheadinfo = 'echo \'Running the plan ' + self.motioninfo.planName[
+                    specific_plan] + ' for patient ' + self.motioninfo.patientName[specific_plan] + '\'\n'
+                writesh.writelines(planheadinfo)
                 for specific_daf in range(0, len(self.motioninfo.dafinfo[specific_plan])):
-                    planheadinfo = 'echo \'Running the plan ' + self.motioninfo.planName[
-                        specific_plan] + ' for patient ' + self.motioninfo.patientName[specific_plan] + '\'\n'
                     plandafinfo = 'echo \'#for ' + self.motioninfo.dafinfo[specific_plan][specific_daf] + '\'\n'
                     cd2execfolder='cd '+self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/4DdoseRecon/exec/'+ \
                            self.motioninfo.planName[specific_plan]+'/'+self.motioninfo.dafinfo[specific_plan][specific_daf][:-4]+'/'+ '\n'
