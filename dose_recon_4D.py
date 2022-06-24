@@ -94,6 +94,7 @@ class class_dose_recon_4D():
                                      self.motioninfo.patientID[specific_plan] + '/' + \
                                      self.motioninfo.path2Plan[specific_plan][specific_field] + '/' + \
                                      self.motioninfo.beamName[specific_plan][specific_field] + '.rst'
+                    print(path2rst)
                     [FirstEnergy_rst,LastEnergy_rst]=self.fun_get_rst_first_end_energy(path2rst)
                     for lmdoutfilename in path_list:
                         if lmdoutfilename.endswith('.lmdout') == False:
