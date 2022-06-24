@@ -152,8 +152,8 @@ class class_dose_recon_4D():
                 # each daf write an exec
                 ######
                 createexec = self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/4DdoseRecon/exec/' + \
-                             self.motioninfo.planName[specific_plan]+'/'+ self.motioninfo.dafinfo[specific_plan][specific_daf] + \
-                             +'/'+self.motioninfo.planName[specific_plan]+'.exec'
+                             self.motioninfo.planName[specific_plan]+'/'+ self.motioninfo.dafinfo[specific_plan][specific_daf][:-4] + \
+                             '/'+self.motioninfo.planName[specific_plan]+'.exec'
                 with open(createexec, 'w+') as writeexec:
                     writeexec.writelines(Plan_basedata+Plan_hult+Plan_rbe_Table+Plan_ct+Plan_voi)
                     writeexec.writelines(Plan_set_target_voi+Plan_rbe_model+Plan_setdose)
