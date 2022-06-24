@@ -60,6 +60,9 @@ class class_dose_recon_4D():
             ######
             Plan_field_info=[] #Plan_field_info[field1, field2,...]
             for specific_daf in range(0, len(self.motioninfo.dafinfo)):
+                print(specific_plan)
+                print(specific_daf)
+                print(len(self.motioninfo.dafinfo))
                 print(self.motioninfo.dafinfo[specific_plan][specific_daf])
                 Path2motion = self.path2patientEXE + self.motioninfo.patientID[
                     specific_plan] + '/4DdoseRecon/motion/' + self.motioninfo.planName[specific_plan] + '_' + \
