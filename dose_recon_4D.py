@@ -9,6 +9,7 @@ class class_dose_recon_4D():
         self.fileversion = 1.0
         self.path2patientEXE = '/u/ysheng/MyAIXd/projects/patients/'
         self.path2patientData = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/'
+        self.maxthread=30
     def fun_create_4D_dose_recon_exec(self):
         print("start create 4D dose reconstruction exec for all plans listed in patient_motioninfo.txt")
         for specific_plan in range(0, len(self.motioninfo.planName)):
@@ -128,25 +129,25 @@ class class_dose_recon_4D():
                                             temp] + \
                                         '" / field(' + str(temp + 1) + ') ' + 'voi(' + self.ctinfo.external[
                                             ctinfocount] + ') ' + \
-                                        'maxthreads(30) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                                        'maxthreads(10) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
                     elif self.motioninfo.ion_info[specific_plan] == 'S1H':
                         Plan_doseinfo = Plan_doseinfo + 'dose "' + write2dosepath + \
                                         self.motioninfo.beamName[specific_plan][
                                             temp] + \
                                         '" / field(' + str(temp + 1) + ') ' + 'voi(' + self.ctinfo.external[
                                             ctinfocount] + ') ' + \
-                                        'maxthreads(30) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                                        'maxthreads(10) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
                 if self.motioninfo.ion_info[specific_plan] == 'S3C' or self.motioninfo.ion_info[
                     specific_plan] == 'S6C':
                     Plan_doseinfo = Plan_doseinfo + 'dose "' + write2dosepath + 'total" / field(*) ' + 'voi(' + \
                                     self.ctinfo.external[ctinfocount] + ') ' + \
-                                    'maxthreads(30) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                                    'maxthreads(10) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
                     # set DVH export information
                     Plan_dvh = 'dvh  "' + write2dosepath + 'total.bio" / calculate export(gd) bio\n'
                 elif self.motioninfo.ion_info[specific_plan] == 'S1H':
                     Plan_doseinfo = Plan_doseinfo + 'dose "' + write2dosepath + 'total" / field(*) ' + 'voi(' + \
                                     self.ctinfo.external[ctinfocount] + ') ' + \
-                                    'maxthreads(30) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                                    'maxthreads(10) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
                     # set DVH export information
                     Plan_dvh = 'dvh  "' + write2dosepath + 'total.phys" / calculate export(gd)\n'
                 ######
@@ -163,6 +164,7 @@ class class_dose_recon_4D():
                     writeexec.writelines(Plan_doseinfo+Plan_dvh+'quit')
                 Plan_field_info=[]
     def fun_create_4D_dose_run_sh(self):
+        countparroll=0
         print("start generating the running sh file")
         createsh='/u/ysheng/MyAIXd/projects/patients/commands/06_run4Dexec_local.sh'
         headinfo='echo \'This script will run all 4D dose reconstruct plans\' \n'
@@ -176,7 +178,12 @@ class class_dose_recon_4D():
                     plandafinfo = 'echo \'#for ' + self.motioninfo.dafinfo[specific_plan][specific_daf] + '\'\n'
                     cd2execfolder='cd '+self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/4DdoseRecon/exec/'+ \
                            self.motioninfo.planName[specific_plan]+'/'+self.motioninfo.dafinfo[specific_plan][specific_daf][:-4]+'/'+ '\n'
-                    runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+'.exec -l \n\n'
+                    if countparroll<2:
+                        runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+'.exec -l &\n\n'
+                        countparroll+=1
+                    else:
+                        runexec = 'runtrip.sh ' + self.motioninfo.planName[specific_plan] + '.exec -l\n\n'
+                        countparroll=0
                     writesh.writelines(plandafinfo+cd2execfolder+runexec)
         print('~~~~~~~~~~~~~~~~~running file generated in :~~~~~~~~~~~~~~~')
         print('/u/ysheng/MyAIXd/projects/patients/commands/06_run4Dexec_local.sh')
