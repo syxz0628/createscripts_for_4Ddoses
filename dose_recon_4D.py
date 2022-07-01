@@ -208,15 +208,15 @@ class class_dose_recon_4D():
         return slice_Energy[0],slice_Energy[-1]
     def fun_copy_combine_logfiles(self):
         writeshname='/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs.sh'
-        write_log_name='/u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/00_total.log'
+        write_log_name='/u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log'
         with open(writeshname, 'w+') as log_file:
             for logfilepath in self.path2logfiles:
                 copyname = logfilepath.replace('/','_')
-                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/'+copyname[35:]+'\n'
+                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/'+copyname[35:]+'\n'
                 log_file.writelines(copycommand)
             log_file.writelines('rm ' + write_log_name+'\n')
             log_file.writelines(
-                'find /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/ -name "*.log" | xargs cat > /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/00_total.log' + '\n')
+                'find /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/ -name "*.log" | xargs cat > /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log' + '\n')
             log_file.writelines('echo log file merged in: '+write_log_name)
 
 
