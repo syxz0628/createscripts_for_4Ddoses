@@ -211,7 +211,7 @@ class class_dose_recon_4D():
         with open(writeshname, 'w+') as log_file:
             for logfilepath in self.path2logfiles:
                 copyname = logfilepath.replace('/','_')
-                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/'+copyname[35:-13]+'.log'+'\n'
+                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/'+copyname[35]+'\n'
                 log_file.writelines(copycommand)
 
 
