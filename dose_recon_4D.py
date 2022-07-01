@@ -207,11 +207,11 @@ class class_dose_recon_4D():
                     slice_Energy.append(submachineinfo[2])
         return slice_Energy[0],slice_Energy[-1]
     def fun_copy_combine_logfiles(self):
-        writeshname='/u/ysheng/MyAIXd/projects/patients/commands/062_combinelogs.sh'
+        writeshname='/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs.sh'
         with open(writeshname, 'w+') as log_file:
             for logfilepath in self.path2logfiles:
                 copyname = logfilepath.replace('/','_')
-                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/'+copyname[35:]+'\n'
+                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/'+copyname[35:-13]+'.log'+'\n'
                 log_file.writelines(copycommand)
 
 
