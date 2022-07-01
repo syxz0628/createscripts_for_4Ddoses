@@ -88,6 +88,4 @@ if __name__ == '__main__':
     if args.temp:
         tempinfo=temp_write_planinfo.class_temp(CTinfo, dafmbrdata)
         tempinfo.fun_tempwrite()
-    if args.combinelog:
-        tempinfo = combine_log.class_combine_log(CTinfo, dafmbrdata)
-        tempinfo.fun_combine_logfiles()
+
