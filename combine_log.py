@@ -14,7 +14,7 @@ class class_combine_log :
                 printinfo1 = '#For patient:' + self.motioninfo.patientName[patientNo] + ' plan:' + \
                              self.motioninfo.planName[patientNo] + ' daf:' + dafNo
                 daffolder = patientIDstringLocal + '/4DdoseRecon/exec/' + self.motioninfo.planName[
-                    patientNo] + '_' + dafNo[:-4]
+                    patientNo] + '_' + dafNo[:-4]+'/'
                 path_list = os.listdir(daffolder)
                 for anyfilename in path_list:
                     print(anyfilename)
@@ -22,7 +22,7 @@ class class_combine_log :
                         copyname = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/' + \
                                    self.motioninfo.patientName[patientNo] + '_' + self.motioninfo.planName[
                                        patientNo] + '_' + '_' + dafNo[:-4] + '.log'
-                        copycommand='cp '+daffolder+'/'+anyfilename+' '+copyname
+                        copycommand='cp '+daffolder+anyfilename+' '+copyname
                         val=os.system(copycommand)
                         print(val)
 
