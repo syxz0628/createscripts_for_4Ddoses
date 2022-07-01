@@ -1,6 +1,8 @@
 import sys
 import os
 
+import combine_log
+
 
 class class_dose_recon_4D():
     def __init__(self,ctinfo,motioninfo):
@@ -10,6 +12,7 @@ class class_dose_recon_4D():
         self.path2patientEXE = '/u/ysheng/MyAIXd/projects/patients/'
         self.path2patientData = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/'
         self.maxthread=30
+        self.path2logfiles=[]
     def fun_create_4D_dose_recon_exec(self):
         print("start create 4D dose reconstruction exec for all plans listed in patient_motioninfo.txt")
         for specific_plan in range(0, len(self.motioninfo.planName)):
@@ -178,6 +181,11 @@ class class_dose_recon_4D():
                     plandafinfo = 'echo \'#for ' + self.motioninfo.dafinfo[specific_plan][specific_daf] + '\'\n'
                     cd2execfolder='cd '+self.path2patientEXE + self.motioninfo.patientID[specific_plan]+'/4DdoseRecon/exec/'+ \
                            self.motioninfo.planName[specific_plan]+'/'+self.motioninfo.dafinfo[specific_plan][specific_daf][:-4]+'/'+ '\n'
+                    logfilepath = self.path2patientEXE + self.motioninfo.patientID[
+                        specific_plan] + '/4DdoseRecon/exec/' + \
+                                    self.motioninfo.planName[specific_plan] + '/' + \
+                                    self.motioninfo.dafinfo[specific_plan][specific_daf][:-4] + '/' + self.motioninfo.planName[specific_plan]+'.log'
+                    self.path2logfiles.append(logfilepath)
                     if countparroll<2: #run 3 exec file parallely
                         runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+'.exec -l &\n\n'
                         countparroll+=1
@@ -187,7 +195,10 @@ class class_dose_recon_4D():
                     writesh.writelines(plandafinfo+cd2execfolder+runexec)
         print('~~~~~~~~~~~~~~~~~running file generated in :~~~~~~~~~~~~~~~')
         print('/u/ysheng/MyAIXd/projects/patients/commands/06_run4Dexec_local.sh')
-
+        print(self.path2logfiles)
+        #generate_log=combine_log.class_combine_log(self.ctinfo,self.motioninfo,self.path2logfiles)
+        #generate_log.fun_copy_logfiles()
+        #generate_log.fun_combine_logfiles()
     def fun_get_rst_first_end_energy(self,path2rst):
         slice_Energy = []
         with open(path2rst) as rstfile:
@@ -197,3 +208,6 @@ class class_dose_recon_4D():
                     submachineinfo = sline.split()
                     slice_Energy.append(submachineinfo[2])
         return slice_Energy[0],slice_Energy[-1]
+
+
+

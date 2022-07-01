@@ -1,11 +1,12 @@
 import os
 
 class class_combine_log :
-    def __init__(self,ctinfo,motioninfo):
+    def __init__(self,ctinfo,motioninfo,path2logfiles):
         self.ctinfo=ctinfo
         self.motioninfo=motioninfo
+        self.path2logfiles=path2logfiles
         self.fileversion = 1.0
-    def fun_combine_logfiles(self):
+    def fun_copy_logfiles(self):
         for patientNo in range(0, len(self.motioninfo.planNumber)):
             patientIDstringMotion = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/' + self.motioninfo.patientID[
                 patientNo]
