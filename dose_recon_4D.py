@@ -215,7 +215,7 @@ class class_dose_recon_4D():
                 copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/'+copyname[35:]+'\n'
                 log_file.writelines(copycommand)
             log_file.writelines('rm ' + write_log_name+'\n')
-            log_file.writelines('find "/u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/*.log" | xargs cat > 00_total.log)
+            log_file.writelines('find "/u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/*.log" | xargs cat > 00_total.log')
             log_file.writelines('echo log file merged in: '+write_log_name)
 
 
