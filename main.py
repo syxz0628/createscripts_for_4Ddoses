@@ -78,12 +78,12 @@ if __name__ == '__main__':
     elif args.ThreeDrec:
         print('Path 2 file for patient plan and motion paramters "-m" is necessary for generate the 3D plan')
         sys.exit()
-    if args.FourDrec and args.motionpath!=None:  # output 3D plan exec file.
+    if args.FourDrec and args.motionpath!=None:  # output 4D plan exec file.
         dose_recon_4D_exec=dose_recon_4D.class_dose_recon_4D(CTinfo,dafmbrdata)
         dose_recon_4D_exec.fun_create_4D_dose_recon_exec()
         dose_recon_4D_exec.fun_create_4D_dose_run_sh()
     elif args.ThreeDrec:
-        print('Path 2 file for patient plan and motion paramters "-m" is necessary for generate the 3D plan')
+        print('Path 2 file for patient plan and motion paramters "-m" is necessary for generate the 4D plan')
         sys.exit()
     if args.temp:
         tempinfo=temp_write_planinfo.class_temp(CTinfo, dafmbrdata)

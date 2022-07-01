@@ -17,6 +17,7 @@ class class_combine_log :
                     patientNo] + '_' + dafNo[:-4]
                 path_list = os.listdir(daffolder)
                 for anyfilename in path_list:
+                    print(anyfilename)
                     if anyfilename.endswith('.log'):
                         copyname = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/' + \
                                    self.motioninfo.patientName[patientNo] + '_' + self.motioninfo.planName[
