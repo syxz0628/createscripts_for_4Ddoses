@@ -14,7 +14,7 @@ class class_combine_log :
                 printinfo1 = '#For patient:' + self.motioninfo.patientName[patientNo] + ' plan:' + \
                              self.motioninfo.planName[patientNo] + ' daf:' + dafNo
                 daffolder = patientIDstringLocal + '/4DdoseRecon/exec/' + self.motioninfo.planName[
-                    patientNo] + '_' + dafNo[:-4]+'/'
+                    patientNo] + '/' + dafNo[:-4]+'/'
                 path_list = os.listdir(daffolder)
                 for anyfilename in path_list:
                     print(anyfilename)
