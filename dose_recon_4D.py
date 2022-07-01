@@ -208,11 +208,16 @@ class class_dose_recon_4D():
         return slice_Energy[0],slice_Energy[-1]
     def fun_copy_combine_logfiles(self):
         writeshname='/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs.sh'
-        with open(writeshname, 'w+') as log_file:
+        write_log_name='/u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/00_total.log'
+        with open(write_log_name, 'w+') as total_log_file:
             for logfilepath in self.path2logfiles:
-                copyname = logfilepath.replace('/','_')
-                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/'+copyname[35:]+'\n'
-                log_file.writelines(copycommand)
+                with open(logfilepath) as logfile:
+                    startmerge=logfile.readlines()
+                    total_log_file.writelines(startmerge)
+                #     copyname = logfilepath.replace('/','_')
+                # copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/'+copyname[35:]+'\n'
+                # log_file.writelines(copycommand)
+
 
 
 
