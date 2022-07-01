@@ -209,15 +209,14 @@ class class_dose_recon_4D():
     def fun_copy_combine_logfiles(self):
         writeshname='/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs.sh'
         write_log_name='/u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/00_total.log'
-        with open(write_log_name, 'w+') as total_log_file:
+        with open(writeshname, 'w+') as log_file:
             for logfilepath in self.path2logfiles:
-                with open(logfilepath) as logfile:
-                    startmerge=logfile.readlines()
-                    total_log_file.writelines(startmerge)
-                #     copyname = logfilepath.replace('/','_')
-                # copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/'+copyname[35:]+'\n'
-                # log_file.writelines(copycommand)
-
+                copyname = logfilepath.replace('/','_')
+                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/'+copyname[35:]+'\n'
+                log_file.writelines(copycommand)
+            log_file.writelines('rm ' + write_log_name+'\n')
+            log_file.writelines('find "/u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/*.log" | xargs cat > 00_total.log)
+            log_file.writelines('echo log file merged in: '+write_log_name)
 
 
 
