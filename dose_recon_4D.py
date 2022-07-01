@@ -196,9 +196,7 @@ class class_dose_recon_4D():
         print('~~~~~~~~~~~~~~~~~running file generated in :~~~~~~~~~~~~~~~')
         print('/u/ysheng/MyAIXd/projects/patients/commands/06_run4Dexec_local.sh')
         print(self.path2logfiles)
-        #generate_log=combine_log.class_combine_log(self.ctinfo,self.motioninfo,self.path2logfiles)
-        #generate_log.fun_copy_logfiles()
-        #generate_log.fun_combine_logfiles()
+        self.fun_copy_combine_logfiles()
     def fun_get_rst_first_end_energy(self,path2rst):
         slice_Energy = []
         with open(path2rst) as rstfile:
@@ -208,6 +206,13 @@ class class_dose_recon_4D():
                     submachineinfo = sline.split()
                     slice_Energy.append(submachineinfo[2])
         return slice_Energy[0],slice_Energy[-1]
+    def fun_copy_combine_logfiles(self):
+        writeshname='/u/ysheng/MyAIXd/projects/patients/commands/062_combinelogs.sh'
+        with open(writeshname, 'w+') as log_file:
+            for logfilepath in self.path2logfiles:
+                copyname = logfilepath.replace('/','_')
+                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP-logs/'+copyname[35:]+'\n'
+                log_file.writelines(copycommand)
 
 
 
