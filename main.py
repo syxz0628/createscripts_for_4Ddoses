@@ -10,6 +10,7 @@ import voi_ave2p00
 import dose_recon_3D
 import dose_recon_4D
 import temp_write_planinfo
+import combine_log
 
 if __name__ == '__main__':
 
@@ -31,6 +32,8 @@ if __name__ == '__main__':
     parser.add_argument("-F", "--FourDrec", required=False, action='store_true',
                         help="Generate 4D plans exec files and sh file.")
     parser.add_argument("-t", "--temp", required=False, action='store_true',
+                        help="Write some tempinfo.")
+    parser.add_argument("-c", "--combinelog", required=False, action='store_true',
                         help="Write some tempinfo.")
     # parser.add_argument("-s","--showfigs", required=False,  action='store_true', help="show daf and related figures", default="False")
     # parser.add_argument("-m","--mbr", nargs='?',required=False, help="machine beam record .xml file path")
@@ -85,3 +88,6 @@ if __name__ == '__main__':
     if args.temp:
         tempinfo=temp_write_planinfo.class_temp(CTinfo, dafmbrdata)
         tempinfo.fun_tempwrite()
+    if args.combinelog():
+        tempinfo = combine_log.class_combine_log(CTinfo, dafmbrdata)
+        tempinfo.fun_combine_logfiles()
