@@ -101,7 +101,7 @@ class class_dose_recon_3D():
                 writeexec.writelines(Plan_fieldinfo+Plan_doseinfo+Plan_dvh+'quit')
     def fun_create_3D_dose_run_sh(self):
         print("start generating the running sh file")
-        createsh='/u/ysheng/MyAIXd/projects/patients/commands/05_run3Dexec_local.sh'
+        createsh='/u/ysheng/MyAIXd/projects/patients/commands/051_run3Dexec_local.sh'
         headinfo='echo \'This script will run all 3D dose reconstruct plans\' \n'
         with open (createsh,'w+') as writesh:
             writesh.writelines(headinfo)
@@ -114,3 +114,17 @@ class class_dose_recon_3D():
                 writesh.writelines(planheadinfo+cd2execfolder+runexec)
         print('running file generated in :')
         print('/u/ysheng/MyAIXd/projects/patients/commands/05_run3Dexec.sh')
+    def fun_copy_combine_logfiles(self):
+        writeshname='/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs.sh'
+        write_log_name='/u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log'
+        with open(writeshname, 'w+') as log_file:
+            for logfilepath in self.path2logfiles:
+                copyname = logfilepath.replace('/','_')
+                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/'+copyname[35:]+'\n'
+                log_file.writelines(copycommand)
+            log_file.writelines('rm ' + write_log_name+'\n')
+            log_file.writelines(
+                'find /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/ -name "*.log" | xargs cat > /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log' + '\n')
+            log_file.writelines('echo log file merged in: '+write_log_name)
+
+

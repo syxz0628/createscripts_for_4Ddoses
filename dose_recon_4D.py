@@ -1,7 +1,7 @@
 import sys
 import os
 
-import combine_log
+import related_funs
 
 
 class class_dose_recon_4D():
@@ -194,9 +194,11 @@ class class_dose_recon_4D():
                         countparroll=0
                     writesh.writelines(plandafinfo+cd2execfolder+runexec)
         print('~~~~~~~~~~~~~~~~~running file generated in :~~~~~~~~~~~~~~~')
-        print('/u/ysheng/MyAIXd/projects/patients/commands/06_run4Dexec_local.sh')
-        print(self.path2logfiles)
-        self.fun_copy_combine_logfiles()
+        print('/u/ysheng/MyAIXd/projects/patients/commands/061_run4Dexec_local.sh')
+        writeshname = '/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs.sh'
+        combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log'
+        related_funs.fun_copy_combine_logfiles(writeshname,combine_log_name,self.path2logfiles)
+        #self.fun_copy_combine_logfiles()
     def fun_get_rst_first_end_energy(self,path2rst):
         slice_Energy = []
         with open(path2rst) as rstfile:
