@@ -1,5 +1,5 @@
 import os
-
+import related_funs
 
 class class_dose_recon_3D():
     def __init__(self,ctinfo,motioninfo):
@@ -8,6 +8,7 @@ class class_dose_recon_3D():
         self.fileversion = 1.0
         self.path2patientEXE = '/u/ysheng/MyAIXd/projects/patients/'
         self.path2patientData = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/'
+        self.path2logfiles=[]
     def fun_create_3D_dose_recon_exec(self):
         print("start create 3D dose reconstruction exec for all plans listed in patient_motioninfo.txt")
         for specific_plan in range(0, len(self.motioninfo.planName)):
@@ -112,19 +113,15 @@ class class_dose_recon_3D():
                        self.motioninfo.planName[specific_plan]+'/ \n'
                 runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+'.exec -l \n\n'
                 writesh.writelines(planheadinfo+cd2execfolder+runexec)
-        print('running file generated in :')
-        print('/u/ysheng/MyAIXd/projects/patients/commands/05_run3Dexec.sh')
-    def fun_copy_combine_logfiles(self):
-        writeshname='/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs.sh'
-        write_log_name='/u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log'
-        with open(writeshname, 'w+') as log_file:
-            for logfilepath in self.path2logfiles:
-                copyname = logfilepath.replace('/','_')
-                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/'+copyname[35:]+'\n'
-                log_file.writelines(copycommand)
-            log_file.writelines('rm ' + write_log_name+'\n')
-            log_file.writelines(
-                'find /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/ -name "*.log" | xargs cat > /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log' + '\n')
-            log_file.writelines('echo log file merged in: '+write_log_name)
+                logfilepath = self.path2patientEXE + self.motioninfo.patientID[
+                    specific_plan] + '/3Ddose/exec/' + \
+                              self.motioninfo.planName[specific_plan] + '/' + \
+                              self.motioninfo.planName[specific_plan] + '.log'
+                self.path2logfiles.append(logfilepath)
+        print('~~~~~~~~~~~~~running file generated in :~~~~~~~~~~~~~~~')
+        print('/u/ysheng/MyAIXd/projects/patients/commands/051_run3Dexec.sh')
 
-
+        write052shname = '/u/ysheng/MyAIXd/projects/patients/commands/052_combine_TRiP_3D_logs_local.sh'
+        print('/u/ysheng/MyAIXd/projects/patients/commands/052_combine_TRiP_3D_logs_local.sh')
+        combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP_3D_logs/00_total.log'
+        related_funs.fun_copy_combine_logfiles(write052shname,combine_log_name,self.path2logfiles)

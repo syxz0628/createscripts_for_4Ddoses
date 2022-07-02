@@ -195,10 +195,12 @@ class class_dose_recon_4D():
                     writesh.writelines(plandafinfo+cd2execfolder+runexec)
         print('~~~~~~~~~~~~~~~~~running file generated in :~~~~~~~~~~~~~~~')
         print('/u/ysheng/MyAIXd/projects/patients/commands/061_run4Dexec_local.sh')
-        writeshname = '/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs.sh'
+
+        write062shname = '/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs_local.sh'
+        print('/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs_local.sh')
         combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log'
-        related_funs.fun_copy_combine_logfiles(writeshname,combine_log_name,self.path2logfiles)
-        #self.fun_copy_combine_logfiles()
+        related_funs.fun_copy_combine_logfiles(write062shname,combine_log_name,self.path2logfiles)
+
     def fun_get_rst_first_end_energy(self,path2rst):
         slice_Energy = []
         with open(path2rst) as rstfile:
@@ -208,18 +210,5 @@ class class_dose_recon_4D():
                     submachineinfo = sline.split()
                     slice_Energy.append(submachineinfo[2])
         return slice_Energy[0],slice_Energy[-1]
-    def fun_copy_combine_logfiles(self):
-        writeshname='/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs.sh'
-        write_log_name='/u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log'
-        with open(writeshname, 'w+') as log_file:
-            for logfilepath in self.path2logfiles:
-                copyname = logfilepath.replace('/','_')
-                copycommand='cp '+logfilepath+' /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/'+copyname[35:]+'\n'
-                log_file.writelines(copycommand)
-            log_file.writelines('rm ' + write_log_name+'\n')
-            log_file.writelines(
-                'find /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/ -name "*.log" | xargs cat > /u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log' + '\n')
-            log_file.writelines('echo log file merged in: '+write_log_name)
-
 
 

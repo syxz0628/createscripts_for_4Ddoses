@@ -1,8 +1,8 @@
 import os
 import sys
 def fun_copy_combine_logfiles(write_sh_name,combine_log_name,path2logfiles):
-    write_sh_name = '/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs.sh'
-    combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log'
+    #write_sh_name = '/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs.sh'
+    #combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log'
     combine_log_path=combine_log_name[:combine_log_name.rfind('/')+1]
     with open(write_sh_name, 'w+') as log_file:
         for logfilepath in path2logfiles:
