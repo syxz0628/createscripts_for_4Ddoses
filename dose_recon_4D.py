@@ -132,25 +132,25 @@ class class_dose_recon_4D():
                                             temp] + \
                                         '" / field(' + str(temp + 1) + ') ' + 'voi(' + self.ctinfo.external[
                                             ctinfocount] + ') ' + \
-                                        'maxthreads(10) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                                        'maxthreads(15) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
                     elif self.motioninfo.ion_info[specific_plan] == 'S1H':
                         Plan_doseinfo = Plan_doseinfo + 'dose "' + write2dosepath + \
                                         self.motioninfo.beamName[specific_plan][
                                             temp] + \
                                         '" / field(' + str(temp + 1) + ') ' + 'voi(' + self.ctinfo.external[
                                             ctinfocount] + ') ' + \
-                                        'maxthreads(10) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                                        'maxthreads(15) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
                 if self.motioninfo.ion_info[specific_plan] == 'S3C' or self.motioninfo.ion_info[
                     specific_plan] == 'S6C':
                     Plan_doseinfo = Plan_doseinfo + 'dose "' + write2dosepath + 'total" / field(*) ' + 'voi(' + \
                                     self.ctinfo.external[ctinfocount] + ') ' + \
-                                    'maxthreads(10) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                                    'maxthreads(15) direct calculate alg(msdb) bio bioalg(ld) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
                     # set DVH export information
                     Plan_dvh = 'dvh  "' + write2dosepath + 'total.bio" / calculate export(gd) bio\n'
                 elif self.motioninfo.ion_info[specific_plan] == 'S1H':
                     Plan_doseinfo = Plan_doseinfo + 'dose "' + write2dosepath + 'total" / field(*) ' + 'voi(' + \
                                     self.ctinfo.external[ctinfocount] + ') ' + \
-                                    'maxthreads(10) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
+                                    'maxthreads(15) direct calculate alg(msdb) nosvv norbe write datatype(float) subsample(3,3,3,mm) \n'
                     # set DVH export information
                     Plan_dvh = 'dvh  "' + write2dosepath + 'total.phys" / calculate export(gd)\n'
                 ######
@@ -186,7 +186,7 @@ class class_dose_recon_4D():
                                     self.motioninfo.planName[specific_plan] + '/' + \
                                     self.motioninfo.dafinfo[specific_plan][specific_daf][:-4] + '/' + self.motioninfo.planName[specific_plan]+'.log'
                     self.path2logfiles.append(logfilepath)
-                    if countparroll<2: #run 3 exec file parallely
+                    if countparroll < 1: #run 3 exec file parallely
                         runexec='runtrip.sh '+self.motioninfo.planName[specific_plan]+'.exec -l &\n\n'
                         countparroll+=1
                     else:
