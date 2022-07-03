@@ -6,7 +6,7 @@ def fun_copy_combine_logfiles(write_sh_name,combine_log_name,path2logfiles):
     combine_log_path=combine_log_name[:combine_log_name.rfind('/')+1]
     with open(write_sh_name, 'w+') as log_file:
         # delete log files in combine_log_path
-        log_file.writelines('rm ' + combine_log_path + ' * -rf\n')
+        log_file.writelines('rm ' + combine_log_path + '* -rf\n')
         for logfilepath in path2logfiles:
             copyname = logfilepath.replace('/', '_')
             copycommand = 'cp ' + logfilepath + ' ' + combine_log_path + copyname[35:] + '\n'
