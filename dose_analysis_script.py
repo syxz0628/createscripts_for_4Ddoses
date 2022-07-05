@@ -18,13 +18,13 @@ class class_dose_analysis():
             for specific_plan in range(0, len(self.motioninfo.planName)):
                 print('start to write plan: ' + self.motioninfo.planName[specific_plan] + ' for patient:' +
                       self.motioninfo.patientName[specific_plan])
-                analysis_file.writelines('# paitent: ',self.motioninfo.patientName[specific_plan], ' plan: ',self.motioninfo.planName[specific_plan])
+                analysis_file.writelines('# paitent: '+self.motioninfo.patientName[specific_plan]+ ' plan: '+self.motioninfo.planName[specific_plan]+'\n')
                 for folder in self.folderlist:
                     if folder=='3Ddose': # /u/ysheng/MyAIXd/projects/patients/ID/folder/
-                        analysis_file.writelines(self.dose_analysis_script_path, '-n ',self.motioninfo.patientName[specific_plan],
-                                                 ' -p ',self.motioninfo.planName[specific_plan],
-                                                 ' -t ',self.motioninfo.targets[specific_plan], # list of target
-                                                 ' -d ',self.motioninfo.prescribdose[specific_plan], # list of pd
-                                                 ' -f ',self.motioninfo.fractions[specific_plan],
-                                                 ' -g ',self.path2patientEXE,
-                                                 self.motioninfo.patientID[specific_plan], '/', folder, '/dose/', self.motioninfo.planName[specific_plan],'/total.bio.dvh.gd')
+                        analysis_file.writelines(self.dose_analysis_script_path+ '-n '+self.motioninfo.patientName[specific_plan]+
+                                                 ' -p '+self.motioninfo.planName[specific_plan]+
+                                                 ' -t '+self.motioninfo.targets[specific_plan]+ # list of target
+                                                 ' -d '+self.motioninfo.prescribdose[specific_plan]+ # list of pd
+                                                 ' -f '+self.motioninfo.fractions[specific_plan]+
+                                                 ' -g '+self.path2patientEXE+
+                                                 self.motioninfo.patientID[specific_plan]+ '/'+ folder+ '/dose/'+ self.motioninfo.planName[specific_plan]+'/total.bio.dvh.gd')
