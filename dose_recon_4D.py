@@ -99,13 +99,21 @@ class class_dose_recon_4D():
                                      self.motioninfo.path2Plan[specific_plan][specific_field] + '/' + \
                                      self.motioninfo.beamName[specific_plan][specific_field] + '.rst'
                     [FirstEnergy_rst,LastEnergy_rst]=self.fun_get_rst_first_end_energy(path2rst)
+                    foundlmdout=False
                     for lmdoutfilename in path_list:
                         if lmdoutfilename.endswith('.lmdout') == False:
                             continue
                         if (FirstEnergy_rst in lmdoutfilename) and (LastEnergy_rst in lmdoutfilename):
                             path_list.remove(lmdoutfilename)
                             correct_lmdoutfilename=lmdoutfilename
+                            foundlmdout=True
                             break
+                    if foundlmdout == False:
+                        print("RST and MBR doesn't match, please check: ")
+                        print('patient: ',self.motioninfo.patientID[specific_plan])
+                        print('plan: ', self.motioninfo.path2Plan[specific_plan][specific_field])
+                        print('field: ', self.motioninfo.beamName[specific_plan][specific_field])
+                        sys.exit()
                     try:
                         Path2motion_lmdout = Path2motion + '/lmdout/' + correct_lmdoutfilename
                     except:

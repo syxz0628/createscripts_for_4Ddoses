@@ -1,5 +1,6 @@
 import sys
 import dafmbr_lmdout
+import dose_analysis_script
 import read_CT_info
 import read_motion_info
 import argparse
@@ -26,15 +27,16 @@ if __name__ == '__main__':
     parser.add_argument("-m", "--motionpath", required=False, nargs='?',
                         help="path to motion info folder, required if -L, -T, -F exist")
     parser.add_argument("-L", "--lmdoutsh", required=False, action='store_true',
-                        help="write script to generate the lmdout info for each plans.")
+                        help="write script to generate the lmdout info for each plans 04sh.")
     parser.add_argument("-T", "--ThreeDrec", required=False, action='store_true',
-                        help="Generate 3D plans exec files and sh file.")
+                        help="Generate 3D plans exec files and 051-052 sh file.")
     parser.add_argument("-F", "--FourDrec", required=False, action='store_true',
-                        help="Generate 4D plans exec files and sh file.")
+                        help="Generate 4D plans exec files and 061-062 sh file.")
+    parser.add_argument("-d", "--doseana", required=False, action='store_true',
+                        help="write dose analysis information to 07.doseanalysis.sh.")
     parser.add_argument("-t", "--temp", required=False, action='store_true',
                         help="Write some tempinfo.")
-    parser.add_argument("-c", "--combinelog", required=False, action='store_true',
-                        help="Write some tempinfo.")
+
     # parser.add_argument("-s","--showfigs", required=False,  action='store_true', help="show daf and related figures", default="False")
     # parser.add_argument("-m","--mbr", nargs='?',required=False, help="machine beam record .xml file path")
     # parser.add_argument("-t", "--timeoffset", required=False, type=int, nargs='+',
@@ -65,12 +67,14 @@ if __name__ == '__main__':
     if args.motionpath!=None:
         dafmbrdata=read_motion_info.class_readmotion_info(args.motionpath)
         dafmbrdata.fun_readpat_motion_info()
+
     if args.lmdoutsh and args.motionpath!=None: # output lmdout sh
         creatlmdoutsh=dafmbr_lmdout.class_dafmbr_lmdout_script(CTinfo,dafmbrdata)
         creatlmdoutsh.fun_create_lmdout_sh()
     elif args.lmdoutsh:
         print('Path 2 file for patient plan and motion paramters "-m" is necessary for output the lmdout file ')
         sys.exit()
+
     if args.ThreeDrec and args.motionpath!=None:  # output 3D plan exec file.
         dose_recon_3D_exec=dose_recon_3D.class_dose_recon_3D(CTinfo,dafmbrdata)
         dose_recon_3D_exec.fun_create_3D_dose_recon_exec()
@@ -78,6 +82,7 @@ if __name__ == '__main__':
     elif args.ThreeDrec:
         print('Path 2 file for patient plan and motion paramters "-m" is necessary for generate the 3D plan')
         sys.exit()
+
     if args.FourDrec and args.motionpath!=None:  # output 4D plan exec file.
         dose_recon_4D_exec=dose_recon_4D.class_dose_recon_4D(CTinfo,dafmbrdata)
         dose_recon_4D_exec.fun_create_4D_dose_recon_exec()
@@ -85,7 +90,14 @@ if __name__ == '__main__':
     elif args.FourDrec:
         print('Path 2 file for patient plan and motion paramters "-m" is necessary for generate the 4D plan')
         sys.exit()
+
+    if args.doseana:
+        folderlist=['3Ddose','4DdoseRecon']
+        dose_analysis=dose_analysis_script.class_dose_analysis(CTinfo, dafmbrdata,folderlist)
+        dose_analysis.fun_create_dose_analysis_sh()
+
     if args.temp:
+
         tempinfo=temp_write_planinfo.class_temp(CTinfo, dafmbrdata)
         tempinfo.fun_tempwrite()
 
