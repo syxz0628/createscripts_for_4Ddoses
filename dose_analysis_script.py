@@ -21,10 +21,18 @@ class class_dose_analysis():
                 analysis_file.writelines('# paitent: '+self.motioninfo.patientName[specific_plan]+ ' plan: '+self.motioninfo.planName[specific_plan]+'\n')
                 for folder in self.folderlist:
                     if folder=='3Ddose': # /u/ysheng/MyAIXd/projects/patients/ID/folder/
+                        targetname='['
+                        for targeti in self.motioninfo.targets[specific_plan]:
+                            targetname+targetname+'"'+targeti+'",'
+                        targetname=targetname+']'
+                        targetdose = '['
+                        for targeti in self.motioninfo.prescribdose[specific_plan]:
+                            targetdose + targetdose + '"' + targeti + '",'
+                        targetdose = targetdose + ']'
                         analysis_file.writelines(self.dose_analysis_script_path+ '-n '+self.motioninfo.patientName[specific_plan]+
                                                  ' -p '+self.motioninfo.planName[specific_plan]+
-                                                 ' -t '+self.motioninfo.targets[specific_plan]+ # list of target
-                                                 ' -d '+self.motioninfo.prescribdose[specific_plan]+ # list of pd
+                                                 ' -t '+targetname+ # list of target
+                                                 ' -d '+targetdose+ # list of pd
                                                  ' -f '+self.motioninfo.fractions[specific_plan]+
                                                  ' -g '+self.path2patientEXE+
                                                  self.motioninfo.patientID[specific_plan]+ '/'+ folder+ '/dose/'+ self.motioninfo.planName[specific_plan]+'/total.bio.dvh.gd')
