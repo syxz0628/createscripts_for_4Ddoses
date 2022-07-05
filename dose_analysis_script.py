@@ -23,12 +23,12 @@ class class_dose_analysis():
                     if folder=='3Ddose': # /u/ysheng/MyAIXd/projects/patients/ID/folder/
                         targetname='[' # write target name in one line
                         for targeti in self.motioninfo.targets[specific_plan]:
-                            targetname+targetname+'"'+targeti+'",'
+                            targetname=targetname+'"'+targeti+'",'
                         targetname=targetname+']'
                         targetdose = '['# write target dose in one line
                         print(self.motioninfo.targets[specific_plan])
                         for targeti in self.motioninfo.prescribdose[specific_plan]:
-                            targetdose + targetdose + '"' + targeti + '",'
+                            targetdose = targetdose + '"' + targeti + '",'
                         targetdose = targetdose + ']'
                         analysis_file.writelines(self.dose_analysis_script_path+ '-n '+self.motioninfo.patientName[specific_plan]+
                                                  ' -p '+self.motioninfo.planName[specific_plan]+
