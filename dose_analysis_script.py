@@ -24,7 +24,7 @@ class class_dose_analysis():
                         targetname='[' # write target name in one line
                         for targeti in self.motioninfo.targets[specific_plan]:
                             targetname=targetname+'"'+targeti+'",'
-                        targetname=targetname+']'
+                        targetname=targetname[:-1]+']'
                         targetdose = '['# write target dose in one line
                         print(self.motioninfo.targets[specific_plan])
                         for targeti in self.motioninfo.prescribdose[specific_plan]:
