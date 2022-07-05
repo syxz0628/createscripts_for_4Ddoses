@@ -13,7 +13,7 @@ class class_dose_analysis():
         self.path2logfiles=[]
     def fun_create_dose_analysis_sh(self):
         print("start create dose analysis sh for all plans listed in patient_motioninfo.txt")
-        dose_analysis_filename=self.path2patientEXE+'commands/07_dose_analysis.txt'
+        dose_analysis_filename=self.path2patientEXE+'commands/07_dose_analysis.sh'
         with open (dose_analysis_filename,'w+') as analysis_file:
             for specific_plan in range(0, len(self.motioninfo.planName)):
                 print('start to write plan: ' + self.motioninfo.planName[specific_plan] + ' for patient:' +
@@ -21,11 +21,12 @@ class class_dose_analysis():
                 analysis_file.writelines('# paitent: '+self.motioninfo.patientName[specific_plan]+ ' plan: '+self.motioninfo.planName[specific_plan]+'\n')
                 for folder in self.folderlist:
                     if folder=='3Ddose': # /u/ysheng/MyAIXd/projects/patients/ID/folder/
-                        targetname='['
+                        targetname='[' # write target name in one line
                         for targeti in self.motioninfo.targets[specific_plan]:
                             targetname+targetname+'"'+targeti+'",'
                         targetname=targetname+']'
-                        targetdose = '['
+                        targetdose = '['# write target dose in one line
+                        print(self.motioninfo.targets[specific_plan])
                         for targeti in self.motioninfo.prescribdose[specific_plan]:
                             targetdose + targetdose + '"' + targeti + '",'
                         targetdose = targetdose + ']'
@@ -36,3 +37,4 @@ class class_dose_analysis():
                                                  ' -f '+self.motioninfo.fractions[specific_plan]+
                                                  ' -g '+self.path2patientEXE+
                                                  self.motioninfo.patientID[specific_plan]+ '/'+ folder+ '/dose/'+ self.motioninfo.planName[specific_plan]+'/total.bio.dvh.gd')
+                        analysis_file.write('\n')
