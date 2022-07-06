@@ -34,7 +34,7 @@ class class_dose_analysis():
                 oarname = oarname[:-1]
                 folderl= ''
                 for s in self.folderlist:
-                    folderl=s+'_'
+                    folderl=folderl+s+'_'
                 analysis_file.writelines(
                     self.dose_analysis_script_path + '-i ' + self.motioninfo.patientID[specific_plan] +
                     ' -p ' + self.motioninfo.planName[specific_plan] +
