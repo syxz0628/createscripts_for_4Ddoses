@@ -11,6 +11,8 @@ class class_dose_analysis():
         self.path2patientData = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/'
         self.dose_analysis_script_path='python3 /u/ysheng/MyAIXd/projects/doseanalysis/main.py '
         self.path2logfiles=[]
+
+
     def fun_create_dose_analysis_sh(self):
         print("start create dose analysis sh for all plans listed in patient_motioninfo.txt")
         dose_analysis_filename=self.path2patientEXE+'commands/07_dose_analysis.sh'
@@ -32,9 +34,9 @@ class class_dose_analysis():
                 for oari in self.ctinfo.oarName[self.ctinfo.patientID.index(self.motioninfo.patientID[specific_plan])]:
                     oarname = oarname + oari + ','
                 oarname = oarname[:-1]
-                folderl= ''
+                folderl = '' # give name for the dose txt
                 for s in self.folderlist:
-                    folderl=folderl+s+'_'
+                    folderl = folderl + s + '_'
                 analysis_file.writelines(
                     self.dose_analysis_script_path + '-i ' + self.motioninfo.patientID[specific_plan] +
                     ' -p ' + self.motioninfo.planName[specific_plan] +
@@ -42,7 +44,7 @@ class class_dose_analysis():
                     ' -d ' + targetdose +  # list of pd
                     ' -o ' + oarname +
                     ' -f ' + self.motioninfo.fractions[specific_plan] +
-                    ' -s ' + folderl[:-1]+
+                    ' -s ' + folderl+
                     ' -g ')
                 for folder in self.folderlist:
                     if folder == '3Ddose':  # /u/ysheng/MyAIXd/projects/patients/ID/folder/
