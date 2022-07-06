@@ -19,7 +19,7 @@ class class_dose_analysis():
                 print('start to write plan: ' + self.motioninfo.planName[specific_plan] + ' for patient:' +
                       self.motioninfo.patientName[specific_plan])
                 analysis_file.writelines('# paitent: '+self.motioninfo.patientName[specific_plan]+ ' plan: '+self.motioninfo.planName[specific_plan]+'\n')
-                analysis_file.writelines('mkdir '+self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'/dose_ana_'+self.folderlist[0]+'_'+self.folderlist[1]+'\n')
+                #analysis_file.writelines('mkdir '+self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'/dose_ana_'+self.folderlist[0]+'_'+self.folderlist[1]+'\n')
                 targetname='' # write target name in one line
                 for targeti in self.motioninfo.targets[specific_plan]:
                     targetname=targetname+targeti+','
@@ -32,6 +32,9 @@ class class_dose_analysis():
                 for oari in self.ctinfo.oarName[self.ctinfo.patientID.index(self.motioninfo.patientID[specific_plan])]:
                     oarname = oarname + oari + ','
                 oarname = oarname[:-1]
+                folderl= ''
+                for s in self.folderlist:
+                    folderl=s+'_'
                 analysis_file.writelines(
                     self.dose_analysis_script_path + '-i ' + self.motioninfo.patientID[specific_plan] +
                     ' -p ' + self.motioninfo.planName[specific_plan] +
@@ -39,6 +42,7 @@ class class_dose_analysis():
                     ' -d ' + targetdose +  # list of pd
                     ' -o ' + oarname +
                     ' -f ' + self.motioninfo.fractions[specific_plan] +
+                    ' -s ' + folderl[:-1]+
                     ' -g ')
                 for folder in self.folderlist:
                     if folder == '3Ddose':  # /u/ysheng/MyAIXd/projects/patients/ID/folder/
