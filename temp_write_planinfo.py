@@ -7,6 +7,7 @@ class class_temp():
     def fun_tempwrite(self):
         print("start create some info for all plans listed in patient_motioninfo.txt")
         tempfilepath='/u/ysheng/MyAIXd/projects/patients/commands/99_temp.sh'
+
         with open(tempfilepath,'w+') as writesh:
             for tempNumber in range(0, len(self.motioninfo.planName)):
                 patientpath='mkdir /u/ysheng/MyAIXd/projects/patients/'

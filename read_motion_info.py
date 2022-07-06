@@ -44,11 +44,11 @@ class class_readmotion_info:
                 self.mbrinfo.append([])
                 self.targets.append([])
                 self.prescribdose.append([])
-                for useinfo in range(9,len(basicinfo[9:])):
+                for useinfo in range(0,len(basicinfo)):
                     if basicinfo[useinfo].endswith('.daf'):
-                        self.dafinfo[-1].append(useinfo)
+                        self.dafinfo[-1].append(basicinfo[useinfo])
                     elif basicinfo[useinfo].endswith('.xml'):
-                        self.mbrinfo[-1].append(useinfo)
+                        self.mbrinfo[-1].append(basicinfo[useinfo])
                     elif 'TV' in basicinfo[useinfo]:
                         self.targets[-1].append(basicinfo[useinfo])
                         self.prescribdose[-1].append(basicinfo[useinfo+1])
