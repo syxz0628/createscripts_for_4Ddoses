@@ -47,6 +47,7 @@ class class_dose_analysis():
                         filename=''
                         for dafinfo in self.motioninfo.dafinfo[specific_plan]:
                             filename=filename+self.path2patientEXE+self.motioninfo.patientID[specific_plan]
-                            filename=filename+'/'+folder+'/dose/'+self.motioninfo.planName[specific_plan]+'/'+str(dafinfo[:-4])+'/total.bio.dvh.gd,'
+                            filename=filename+'/'+folder+'/dose/'+self.motioninfo.planName[specific_plan]
+                            filename=filename+'/'+str(dafinfo[:-4])+'/total.bio.dvh.gd,'
                 analysis_file.writelines(filename[:-1])
                 analysis_file.write('\n')
