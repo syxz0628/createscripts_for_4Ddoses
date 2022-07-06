@@ -19,26 +19,33 @@ class class_dose_analysis():
                 print('start to write plan: ' + self.motioninfo.planName[specific_plan] + ' for patient:' +
                       self.motioninfo.patientName[specific_plan])
                 analysis_file.writelines('# paitent: '+self.motioninfo.patientName[specific_plan]+ ' plan: '+self.motioninfo.planName[specific_plan]+'\n')
+
+                targetname='' # write target name in one line
+                for targeti in self.motioninfo.targets[specific_plan]:
+                    targetname=targetname+targeti+','
+                targetname=targetname[:-1]
+                targetdose = ''# write target dose in one line
+                for targeti in self.motioninfo.prescribdose[specific_plan]:
+                    targetdose = targetdose + targeti + ','
+                targetdose = targetdose[:-1]
+                oarname = ''  # write oarname in one line
+                for oari in self.ctinfo.oarName[self.ctinfo.patientID.index(self.motioninfo.patientID[specific_plan])]:
+                    oarname = oarname + oari + ','
+                oarname = oarname[:-1]
+                analysis_file.writelines(
+                    self.dose_analysis_script_path + '-i ' + self.motioninfo.patientID[specific_plan] +
+                    ' -p ' + self.motioninfo.planName[specific_plan] +
+                    ' -t ' + targetname +  # list of target
+                    ' -d ' + targetdose +  # list of pd
+                    ' -o ' + oarname +
+                    ' -f ' + self.motioninfo.fractions[specific_plan] +
+                    ' -g ')
                 for folder in self.folderlist:
-                    if folder=='3Ddose': # /u/ysheng/MyAIXd/projects/patients/ID/folder/
-                        targetname='[' # write target name in one line
-                        for targeti in self.motioninfo.targets[specific_plan]:
-                            targetname=targetname+'"'+targeti+'",'
-                        targetname=targetname[:-1]+']'
-                        targetdose = '['# write target dose in one line
-                        for targeti in self.motioninfo.prescribdose[specific_plan]:
-                            targetdose = targetdose + '"' + targeti + '",'
-                        targetdose = targetdose[:-1] + ']'
-                        oarname = '['  # write oarname in one line
-                        for oari in self.ctinfo.oarName[self.ctinfo.patientID.index(self.motioninfo.patientID[specific_plan])]:
-                            oarname = oarname + '"' + oari + '",'
-                        oarname = oarname[:-1] + ']'
-                        analysis_file.writelines(self.dose_analysis_script_path+ '-n '+self.motioninfo.patientName[specific_plan]+
-                                                 ' -p '+self.motioninfo.planName[specific_plan]+
-                                                 ' -t '+targetname+ # list of target
-                                                 ' -d '+targetdose+ # list of pd
-                                                 ' -o '+oarname+
-                                                 ' -f '+self.motioninfo.fractions[specific_plan]+
-                                                 ' -g '+self.path2patientEXE+
-                                                 self.motioninfo.patientID[specific_plan]+ '/'+ folder+ '/dose/'+ self.motioninfo.planName[specific_plan]+'/total.bio.dvh.gd')
-                        analysis_file.write('\n')
+                    if folder == '3Ddose':  # /u/ysheng/MyAIXd/projects/patients/ID/folder/
+                        analysis_file.writelines(self.path2patientEXE+self.motioninfo.patientID[specific_plan]+ '/'+ folder+ '/dose/'+ self.motioninfo.planName[specific_plan]+'/total.bio.dvh.gd,')
+                    else:
+                        filename=''
+                        for dafinfo in len(self.motioninfo.dafinfo[specific_plan]):
+                            filename=filename+self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'/'+folder+'/dose/'+self.motioninfo.planName[specific_plan]+'/'+dafinfo[:-4]+'/total.bio.dvh.gd,'
+                analysis_file.writelines(filename[:-1])
+                analysis_file.write('\n')
