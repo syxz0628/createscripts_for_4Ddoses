@@ -19,7 +19,7 @@ class class_dose_analysis():
                 print('start to write plan: ' + self.motioninfo.planName[specific_plan] + ' for patient:' +
                       self.motioninfo.patientName[specific_plan])
                 analysis_file.writelines('# paitent: '+self.motioninfo.patientName[specific_plan]+ ' plan: '+self.motioninfo.planName[specific_plan]+'\n')
-
+                analysis_file.writelines('mkdir '+self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'/dose_ana_'+self.folderlist[0]+'_'+self.folderlist[1])
                 targetname='' # write target name in one line
                 for targeti in self.motioninfo.targets[specific_plan]:
                     targetname=targetname+targeti+','
