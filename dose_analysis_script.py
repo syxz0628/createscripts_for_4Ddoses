@@ -63,6 +63,6 @@ class class_dose_analysis():
                                 filename=filename+'/'+str(dafinfo[:-4])+'/total.bio.dvh.gd,'
                 analysis_file.writelines(filename[:-1])
                 analysis_file.write('\n')
-                self.path2datafiles.append(self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'.dose_ana_'+folderl+'_'+self.motioninfo.patientID[specific_plan]+'_'+self.motioninfo.planName[specific_plan]+'.txt')
+                self.path2datafiles.append(self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'/dose_ana_'+folderl+'_'+self.motioninfo.patientID[specific_plan]+'_'+self.motioninfo.planName[specific_plan]+'.txt')
         combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/dose_compare_logs/00_total.log'
         related_funs.fun_copy_combine_logfiles( self.dose_analysis_filename,'a+', combine_log_name, self.path2datafiles)
