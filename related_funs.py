@@ -14,4 +14,6 @@ def fun_copy_combine_logfiles(write_sh_name,writetype,combine_log_name,path2logf
 
         log_file.writelines(
             'find ' + combine_log_path + ' -name "*.log" | xargs cat > ' + combine_log_name + '\n')
+        log_file.writelines(
+            'find ' + combine_log_path + ' -name "*.txt" | xargs cat > ' + combine_log_name + '\n')
         log_file.writelines('echo log file merged in: ' + combine_log_name)

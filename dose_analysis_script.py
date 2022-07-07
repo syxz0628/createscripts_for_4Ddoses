@@ -32,7 +32,7 @@ class class_dose_analysis():
                     targetdose = targetdose + targeti + ','
                 targetdose = targetdose[:-1]
                 oarname = ''  # write oarname in one line
-                for oari in self.ctinfo.oarName[self.ctinfo.patientID.index(self.motioninfo.patientID[specific_plan])]:
+                for oari in self.ctinfo.oarName[self.ctinfo.ctName.index(self.motioninfo.ctName[specific_plan])]:
                     oarname = oarname + oari + ','
                 oarname = oarname[:-1]
                 folderl = '' # give name for the dose txt
@@ -64,5 +64,5 @@ class class_dose_analysis():
                 analysis_file.writelines(filename[:-1])
                 analysis_file.write('\n')
                 self.path2datafiles.append(self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'/dose_ana_'+folderl+'_'+self.motioninfo.patientID[specific_plan]+'_'+self.motioninfo.planName[specific_plan]+'.txt')
-        combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/dose_compare_logs/00_total.log'
+        combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/dose_compare_logs/00_total.txt'
         related_funs.fun_copy_combine_logfiles( self.dose_analysis_filename,'a+', combine_log_name, self.path2datafiles)
