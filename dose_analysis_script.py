@@ -32,9 +32,11 @@ class class_dose_analysis():
                     targetdose = targetdose + targeti + ','
                 targetdose = targetdose[:-1]
                 oarname = ''  # write oarname in one line
-                for oari in self.ctinfo.oarName[self.ctinfo.ctName.index(self.motioninfo.ctName[specific_plan])]:
-                    oarname = oarname + oari + ','
-                oarname = oarname[:-1]
+                for ctinfocount in range(0, len(self.ctinfo.patientID)):
+                    if self.ctinfo.patientID[ctinfocount] == self.motioninfo.patientID[specific_plan]:
+                        if self.ctinfo.ctName[ctinfocount] == self.motioninfo.ctName[specific_plan]:
+                            oarname = ",".join(i for i in self.ctinfo.oarName[ctinfocount])
+
                 folderl = '' # give name for the dose txt
                 for s in self.folderlist:
                     folderl = folderl + s + '_'
