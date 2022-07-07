@@ -48,7 +48,10 @@ class class_dose_analysis():
                     ' -g ')
                 for folder in self.folderlist:
                     if folder == '3Ddose':  # /u/ysheng/MyAIXd/projects/patients/ID/folder/
-                        analysis_file.writelines(self.path2patientEXE+self.motioninfo.patientID[specific_plan]+ '/'+ folder+ '/dose/'+ self.motioninfo.planName[specific_plan]+'/total.bio.dvh.gd,')
+                        if '1H' in self.motioninfo.ion_info[specific_plan]:
+                            analysis_file.writelines(self.path2patientEXE+self.motioninfo.patientID[specific_plan]+ '/'+ folder+ '/dose/'+ self.motioninfo.planName[specific_plan]+'/total.phys.dvh.gd,')
+                        else:
+                            analysis_file.writelines(self.path2patientEXE+self.motioninfo.patientID[specific_plan]+ '/'+ folder+ '/dose/'+ self.motioninfo.planName[specific_plan]+'/total.bio.dvh.gd,')
                     else:
                         filename=''
                         for dafinfo in self.motioninfo.dafinfo[specific_plan]:
