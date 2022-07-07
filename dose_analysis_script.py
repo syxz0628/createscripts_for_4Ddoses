@@ -9,14 +9,15 @@ class class_dose_analysis():
         self.fileversion = 1.0
         self.path2patientEXE = '/u/ysheng/MyAIXd/projects/patients/'
         self.path2patientData = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/'
-        self.dose_analysis_script_path='python3 /u/ysheng/MyAIXd/projects/doseanalysis/main.py '
-        self.path2logfiles=[]
+        self.dose_analysis_script_path='python3 /u/ysheng/MyAIXd/projects/doseanalysis_TRiP/main.py '
+        self.dose_analysis_filename=self.path2patientEXE+'commands/07_dose_analysis.sh'
+        self.path2datafiles=[]
 
 
     def fun_create_dose_analysis_sh(self):
         print("start create dose analysis sh for all plans listed in patient_motioninfo.txt")
-        dose_analysis_filename=self.path2patientEXE+'commands/07_dose_analysis.sh'
-        with open (dose_analysis_filename,'w+') as analysis_file:
+
+        with open (self.dose_analysis_filename,'w+') as analysis_file:
             for specific_plan in range(0, len(self.motioninfo.planName)):
                 print('start to write plan: ' + self.motioninfo.planName[specific_plan] + ' for patient:' +
                       self.motioninfo.patientName[specific_plan])
@@ -62,3 +63,6 @@ class class_dose_analysis():
                                 filename=filename+'/'+str(dafinfo[:-4])+'/total.bio.dvh.gd,'
                 analysis_file.writelines(filename[:-1])
                 analysis_file.write('\n')
+                self.path2datafiles.append(self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'.dose_ana_'+folderl+'_'+self.motioninfo.patientID[specific_plan]+'_'+self.motioninfo.planName[specific_plan]+'.txt')
+        combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/dose_compare_logs/00_total.log'
+        related_funs.fun_copy_combine_logfiles( self.dose_analysis_filename,'a+', combine_log_name, self.path2datafiles)

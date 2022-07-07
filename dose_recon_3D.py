@@ -124,4 +124,4 @@ class class_dose_recon_3D():
         write052shname = '/u/ysheng/MyAIXd/projects/patients/commands/052_combine_TRiP_3D_logs_local.sh'
         print('/u/ysheng/MyAIXd/projects/patients/commands/052_combine_TRiP_3D_logs_local.sh')
         combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP_3D_logs/00_total.log'
-        related_funs.fun_copy_combine_logfiles(write052shname,combine_log_name,self.path2logfiles)
+        related_funs.fun_copy_combine_logfiles(write052shname,'w+',combine_log_name,self.path2logfiles)
