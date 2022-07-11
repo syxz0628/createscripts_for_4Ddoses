@@ -8,6 +8,7 @@ class class_dose_recon_3D():
         self.fileversion = 1.0
         self.path2patientEXE = '/u/ysheng/MyAIXd/projects/patients/'
         self.path2patientData = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/'
+        self.path2database= '/d/bio/medphys/Basedata'
         self.path2logfiles=[]
     def fun_create_3D_dose_recon_exec(self):
         print("start create 3D dose reconstruction exec for all plans listed in patient_motioninfo.txt")
@@ -123,5 +124,5 @@ class class_dose_recon_3D():
 
         write052shname = '/u/ysheng/MyAIXd/projects/patients/commands/052_combine_TRiP_3D_logs_local.sh'
         print('/u/ysheng/MyAIXd/projects/patients/commands/052_combine_TRiP_3D_logs_local.sh')
-        combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP_3D_logs/00_total.log'
-        related_funs.fun_copy_combine_logfiles(write052shname,'w+',combine_log_name,self.path2logfiles)
+        combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP_3D_logs/00_total.dat'
+        related_funs.fun_copy_combine_logfiles(write052shname,'w+',combine_log_name,self.path2logfiles,'.log')

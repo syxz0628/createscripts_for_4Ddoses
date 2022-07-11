@@ -206,8 +206,8 @@ class class_dose_recon_4D():
 
         write062shname = '/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs_local.sh'
         print('/u/ysheng/MyAIXd/projects/patients/commands/062_combine_TRiP_4D_logs_local.sh')
-        combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.log'
-        related_funs.fun_copy_combine_logfiles(write062shname,'w+',combine_log_name,self.path2logfiles)
+        combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/TRiP_logs/00_total.dat'
+        related_funs.fun_copy_combine_logfiles(write062shname,'w+',combine_log_name,self.path2logfiles,'.log')
 
     def fun_get_rst_first_end_energy(self,path2rst):
         slice_Energy = []

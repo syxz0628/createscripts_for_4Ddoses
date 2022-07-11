@@ -66,5 +66,5 @@ class class_dose_analysis():
                 analysis_file.writelines(filename[:-1])
                 analysis_file.write('\n')
                 self.path2datafiles.append(self.path2patientEXE+self.motioninfo.patientID[specific_plan]+'/dose_ana_'+folderl+self.motioninfo.patientID[specific_plan]+'_'+self.motioninfo.planName[specific_plan]+'.txt')
-        combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/dose_compare_logs/00_total.txt'
-        related_funs.fun_copy_combine_logfiles( self.dose_analysis_filename,'a+', combine_log_name, self.path2datafiles)
+        combine_log_name = '/u/ysheng/MyAIXd/projects/patients/commands/dose_compare_logs/00_total.dat'
+        related_funs.fun_copy_combine_logfiles( self.dose_analysis_filename,'a+', combine_log_name, self.path2datafiles,'.txt')
