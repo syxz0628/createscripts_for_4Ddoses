@@ -27,7 +27,7 @@ class class_readpat_info:
                 for useinfo in basicinfo[4:]:
                     if useinfo.isdigit(): # digital means plan number coresponding to daf and plan info file
                         self.plannumber[-1].append(useinfo)
-                    elif 'TV' in useinfo: # oar and target
+                    elif 'TV' in useinfo and not('ung' in useinfo): # oar and target
                         self.targetName[-1].append(useinfo)
                     elif useinfo == basicinfo[-1]:
                         self.external.append(useinfo)
