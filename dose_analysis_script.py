@@ -36,6 +36,7 @@ class class_dose_analysis():
                     if self.ctinfo.patientID[ctinfocount] == self.motioninfo.patientID[specific_plan]:
                         if self.ctinfo.ctName[ctinfocount] == self.motioninfo.ctName[specific_plan]:
                             oarname = ",".join(i for i in self.ctinfo.oarName[ctinfocount])
+                            print(oarname)
 
                 folderl = '' # give name for the dose txt
                 for s in self.folderlist:
