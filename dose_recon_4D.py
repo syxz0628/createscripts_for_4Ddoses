@@ -232,5 +232,5 @@ class class_dose_recon_4D():
                     rst_energy.append(submachineinfo[1])
         path2rst_energy_info='/u/ysheng/MyAIXd/projects/patients/commands/energy_info.txt'
         with open(path2rst_energy_info,'a+') as write_energy_info:
-            write_energy_info.writelines(rst_energy)
+            write_energy_info.writelines(i+'\n' for i in rst_energy)
 
