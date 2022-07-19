@@ -13,6 +13,7 @@ class class_dose_recon_4D():
         self.path2patientData = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/'
         self.maxthread=30
         self.path2logfiles=[]
+        self.rst_energy=[]
     def fun_create_4D_dose_recon_exec(self):
         print("start create 4D dose reconstruction exec for all plans listed in patient_motioninfo.txt")
         for specific_plan in range(0, len(self.motioninfo.planName)):
@@ -98,6 +99,9 @@ class class_dose_recon_4D():
                                      self.motioninfo.patientID[specific_plan] + '/' + \
                                      self.motioninfo.path2Plan[specific_plan][specific_field] + '/' + \
                                      self.motioninfo.beamName[specific_plan][specific_field] + '.rst'
+                    # test
+                    self.fun_get_submachines(path2rst)
+                    # test
                     [FirstEnergy_rst,LastEnergy_rst]=self.fun_get_rst_first_end_energy(path2rst)
                     foundlmdout=False
                     for lmdoutfilename in path_list:
@@ -218,5 +222,15 @@ class class_dose_recon_4D():
                     submachineinfo = sline.split()
                     slice_Energy.append(submachineinfo[2])
         return slice_Energy[0],slice_Energy[-1]
-
+    def fun_get_submachines(self,path2rst):
+        rst_energy=[]
+        with open(path2rst) as rstfile:
+            alllines = rstfile.readlines()
+            for sline in alllines:
+                if ('#submachines' in sline):
+                    submachineinfo = sline.split()
+                    rst_energy.append(submachineinfo[1])
+        path2rst_energy_info='/u/ysheng/MyAIXd/Projects/Patients/command/energy_info.txt'
+        with open(path2rst_energy_info,'a+') as write_energy_info:
+            write_energy_info.writelines(rst_energy)
 
