@@ -230,7 +230,7 @@ class class_dose_recon_4D():
                 if ('#submachines' in sline):
                     submachineinfo = sline.split()
                     rst_energy.append(submachineinfo[1])
-        path2rst_energy_info='/u/ysheng/MyAIXd/projects/patients/command/energy_info.txt'
+        path2rst_energy_info='/u/ysheng/MyAIXd/projects/patients/commands/energy_info.txt'
         with open(path2rst_energy_info,'a+') as write_energy_info:
             write_energy_info.writelines(rst_energy)
 
