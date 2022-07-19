@@ -13,7 +13,7 @@ class class_dose_recon_4D():
         self.path2patientData = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/'
         self.maxthread=30
         self.path2logfiles=[]
-        self.rst_energy=[]
+
     def fun_create_4D_dose_recon_exec(self):
         print("start create 4D dose reconstruction exec for all plans listed in patient_motioninfo.txt")
         for specific_plan in range(0, len(self.motioninfo.planName)):
@@ -100,7 +100,7 @@ class class_dose_recon_4D():
                                      self.motioninfo.path2Plan[specific_plan][specific_field] + '/' + \
                                      self.motioninfo.beamName[specific_plan][specific_field] + '.rst'
                     # test
-                    self.fun_get_submachines(path2rst)
+                    #self.fun_get_submachines(path2rst)
                     # test
                     [FirstEnergy_rst,LastEnergy_rst]=self.fun_get_rst_first_end_energy(path2rst)
                     foundlmdout=False
