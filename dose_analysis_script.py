@@ -10,7 +10,7 @@ class class_dose_analysis():
         self.path2patientEXE = '/u/ysheng/MyAIXd/projects/patients/'
         self.path2patientData = '/d/bio/medphys/PatienData/SPHIC_motion_mitigate/'
         self.dose_analysis_script_path='python3 /u/ysheng/MyAIXd/projects/doseanalysis_TRiP/main.py '
-        self.dose_analysis_filename=self.path2patientEXE+'commands/07_dose_analysis.sh'
+        self.dose_analysis_filename=self.path2patientEXE+'commands/08_4D_3D_DVH_analysis.sh'
         self.path2datafiles=[]
 
 
